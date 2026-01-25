@@ -27,7 +27,7 @@ class Funktion {
      *
      * Beispiel:
      * greet()        -> "Hello World"
-     * greet("Sven")  -> "Hello Clara"
+     * greet("Clara")  -> "Hello Clara"
      */
     static String greet(String name = "World") {
         "Hello ${name}"
