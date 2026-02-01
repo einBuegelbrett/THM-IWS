@@ -1,0 +1,33 @@
+package block_5._10_BuildskriptLesen
+
+plugins {
+    id 'groovy'
+    id 'application'
+}
+
+group = 'de.thm.workshop'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.apache.groovy:groovy:5.0.0'
+    testImplementation 'org.spockframework:spock-core:2.4-groovy-5.0'
+}
+
+application {
+    mainClass = 'block_1.Main'
+}
+
+tasks.register('helloTask') {
+    description = "Gibt eine Begrüßung aus"
+    group = "Workshop"
+
+    doLast {
+        println "Hello from Gradle"
+        println "Projekt: $project.name"
+        println "Version: $version"
+    }
+}

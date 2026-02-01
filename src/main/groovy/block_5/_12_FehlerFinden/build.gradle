@@ -1,0 +1,30 @@
+package block_5._12_FehlerFinden
+
+plugins {
+    id 'groovy'
+    id 'application'
+    id 'java-library'  // unnötig / verwirrend
+}
+
+group = 'de.thm.workshop'
+version = 1.0   // sollte String sein
+
+repositories {
+    mavenCentral   // Klammern fehlen
+}
+
+dependencies {
+    implementation 'org.apache.groovy:groovy:5.0.0'
+    testImplementation 'org.spockframework:spock-core:2.4-groovy-4.0' // falsche Groovy-Version
+    testImplementation 'does:not-exist:1.0' // Dependency existiert nicht
+}
+
+application {
+    mainClass = block_1.Main  // kein String
+}
+
+tasks.register('brokenTask') {
+    doLast(
+            println "Dieser Task ist kaputt"  // Closure falsch
+    )
+}

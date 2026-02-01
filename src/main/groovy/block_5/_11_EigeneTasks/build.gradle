@@ -1,0 +1,38 @@
+package block_5._11_EigeneTasks
+
+plugins {
+    id 'groovy'
+}
+
+group = 'de.thm'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+tasks.register('myTask') {
+    doFirst {
+        println "Task startet..."
+    }
+    doLast {
+        println "Task ist fertig!"
+    }
+}
+
+tasks.register('myTask') {
+    def name = "Groovy-Workshop"
+
+    doLast {
+        println "Willkommen zum ${name}"
+    }
+}
+
+tasks.register('myTask') {
+    group = "Workshop"
+    description = "Mein erster eigener Gradle Task"
+
+    doLast {
+        println "Hallo Gradle!"
+    }
+}
