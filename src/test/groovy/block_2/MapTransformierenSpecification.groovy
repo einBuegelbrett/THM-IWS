@@ -2,7 +2,7 @@ package block_2
 
 import spock.lang.Specification
 
-class _3_MapTransformierenSpecification extends Specification {
+class MapTransformierenSpecification extends Specification {
 
     def prices = [
             apple : 1.2,

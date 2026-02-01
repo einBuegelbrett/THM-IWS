@@ -2,7 +2,7 @@ package block_3
 
 import spock.lang.Specification
 
-class _7_SafeNavigationSpecification extends Specification {
+class SafeNavigationSpecification extends Specification {
 
     def "Gibt Stadt zurück, wenn User und Address vorhanden sind"() {
         given:

@@ -2,7 +2,7 @@ package block_3
 
 import spock.lang.Specification
 
-class _8_MiniDatenPipelineSpecification extends Specification {
+class MiniDatenPipelineSpecification extends Specification {
 
     def "Pipeline filtert INFO-Zeilen und formatiert korrekt"() {
         given:

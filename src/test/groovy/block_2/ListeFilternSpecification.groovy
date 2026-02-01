@@ -2,7 +2,7 @@ package block_2
 
 import spock.lang.Specification
 
-class _2_ListeFilternSpecification extends Specification {
+class ListeFilternSpecification extends Specification {
 
     def "Aufgabe Alle ungeraden Zahlen filtern"() {
         given:

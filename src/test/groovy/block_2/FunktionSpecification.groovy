@@ -2,7 +2,7 @@ package block_2
 
 import spock.lang.Specification
 
-class _4_FunktionSpecification extends Specification {
+class FunktionSpecification extends Specification {
 
     // -------- Aufgabe greet --------
 

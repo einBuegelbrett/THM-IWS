@@ -2,7 +2,7 @@ package block_3
 
 import spock.lang.Specification
 
-class _6_KlassenSpecification extends Specification {
+class KlassenSpecification extends Specification {
 
     def "fullName gibt Vor- und Nachnamen zurück"() {
         given:

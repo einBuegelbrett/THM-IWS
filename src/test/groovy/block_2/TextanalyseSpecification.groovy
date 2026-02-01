@@ -2,7 +2,7 @@ package block_2
 
 import spock.lang.Specification
 
-class _5_TextanalyseSpecification extends Specification {
+class TextanalyseSpecification extends Specification {
 
     def text = "Groovy macht Groovy Code kurz und lesbar"
 
