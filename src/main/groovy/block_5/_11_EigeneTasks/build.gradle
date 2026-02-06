@@ -67,7 +67,7 @@ tasks.register('createInfoFile') {
     description = "Erstellt eine Info-Datei mit Projektmetadaten"
 
     doLast {
-        def outputFile = file("$buildDir/info.txt")
+        def outputFile = file("$layout.buildDirectory/info.txt")
 
         outputFile.parentFile.mkdirs()
 
@@ -104,7 +104,7 @@ tasks.register('generateNumbers') {
     description = "Erstellt Datei mit Zahlen von 1 bis 10"
 
     doLast {
-        def file = file("$buildDir/numbers.txt")
+        def file = file("$layout.buildDirectory/numbers.txt")
 
         file.parentFile.mkdirs()
 
@@ -123,9 +123,9 @@ tasks.register('processNumbers') {
     dependsOn 'generateNumbers'
 
     doLast {
-        def inputFile  = file("$buildDir/numbers.txt")
+        def inputFile  = file("$layout.buildDirectory/numbers.txt")
 
-        def outputFile = file("$buildDir/evenNumbers.txt")
+        def outputFile = file("$layout.buildDirectory/evenNumbers.txt")
 
         def numbers = inputFile.readLines()
 

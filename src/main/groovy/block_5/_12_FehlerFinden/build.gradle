@@ -36,8 +36,8 @@ tasks.register('createInfoFile') {
 
     doLast {
 
-        // buildDir falsch geschrieben
-        def outputFile = file("$buidDir/info.txt")
+        // buildDir deprecated
+        def outputFile = file("$buildDir/info.txt")
 
         // mkdirs fehlt → Ordner evtl. nicht vorhanden
         def content = """
@@ -55,7 +55,7 @@ tasks.register('createInfoFile') {
 tasks.register('generateNumbers') {
 
     doLast {
-        def file = file("$buildDir/numbers.txt")
+        def file = file("$layout.buildDirectory/numbers.txt")
 
         // parentFile.mkdirs() fehlt
 
@@ -71,8 +71,8 @@ tasks.register('processNumbers') {
     dependsOn 'generateNumber'
 
     doLast {
-        def inputFile = file("$buildDir/number.txt")   // falscher Dateiname
-        def outputFile = file("$buildDir/evenNumbers.txt")
+        def inputFile = file("$layout.buildDirectory/number.txt")   // falscher Dateiname
+        def outputFile = file("$layout.buildDirectory/evenNumbers.txt")
 
         // Datei evtl. nicht vorhanden
         def numbers = inputFile.readLines()
