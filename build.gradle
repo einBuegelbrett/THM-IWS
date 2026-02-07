@@ -6,6 +6,7 @@ group = 'de.thm'
 version = '1.0-SNAPSHOT'
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
@@ -14,7 +15,7 @@ dependencies {
     testImplementation platform("org.spockframework:spock-bom:2.4-groovy-5.0")
     testImplementation "org.spockframework:spock-core:2.4-groovy-5.0"
     testRuntimeOnly "org.junit.platform:junit-platform-launcher"
-
+    implementation 'de.thm:groovy-wonderland:LOCAL'
 }
 
 test {
