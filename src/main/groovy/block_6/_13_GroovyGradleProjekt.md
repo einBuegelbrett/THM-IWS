@@ -9,19 +9,21 @@ Dabei übst du Gradle Tasks, Dateiverarbeitung und Groovy-Closures.
 ## Projektstruktur
 Erstelle folgende Ordner und Dateien:
 
-## 📁 Projektstruktur
+## Projektstruktur
 Dein Projekt soll am Ende folgende Struktur haben:
 
+```
 markdown-to-html/  
 ├── build.gradle  
 ├── settings.gradle  
 ├── src/  
 │ └── main/  
-│ └── groovy/  
-│ └── MarkdownConverter.groovy  
+│    └── groovy/  
+│       └── MarkdownConverter.groovy  
 ├── input/  
 │ └── example.md  
 └── output/
+```
 
 ---
 
