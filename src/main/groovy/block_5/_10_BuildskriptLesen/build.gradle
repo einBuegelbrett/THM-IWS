@@ -6,7 +6,7 @@ package block_5._10_BuildskriptLesen
  * Aufgabe 10
  * Ihr werdet nun von oben nach unten durcharbeiten und lernen, was alles mit Tasks in Gradle möglich ist, was die Vorteile sind.
  * Es werden Fragen gestellt, gebe deine Antworten nebendran an. Führe die Tasks auch aus.
- * Als erste Frage vielleicht um Warm zu werden:
+ * Als erste Frage um die Tanzbeine zu wärmen:
  * - Wo kannst du hier ELemente von Groovy (Closures, GStrings, Methoden ohne Klammern, ...) erkennen?
  */
 
@@ -31,7 +31,16 @@ application {
     mainClass = 'block_1.Main'
 }
 
-tasks.register('helloTask') {
+// ==============================
+// Task 1: Begrüßung
+// ==============================
+//
+// Führe `./gradlew greetTask` aus.
+// Fragen:
+// - Was gibt die Task aus?
+// - In welchem Build-Ordner erscheinen Änderungen?
+// - Welche Vorteile hat es, solche kleine Tasks zu erstellen?
+tasks.register('greetTask') {
     description = "Gibt eine Begrüßung aus"
     group = "Workshop"
 
@@ -42,37 +51,68 @@ tasks.register('helloTask') {
     }
 }
 
-// Führe `./gradlew copyTask` aus
-tasks.register('copyTask', Copy) {
+// ==============================
+// Task 2: Dateien kopieren
+// ==============================
+//
+// Führe `./gradlew copyWarTask` aus.
+// Fragen:
+// - Welche Dateien werden kopiert?
+// - Aus welchem Ordner stammen sie?
+// - In welchen Ordner werden sie gelegt?
+// - Was passiert, wenn der Zielordner noch nicht existiert?
+// - Werden alle Dateien kopiert oder nur bestimmte? Warum?
+// - Was passiert, wenn du eine neue .war Datei hinzufügst und die Task erneut ausführst?
+tasks.register('copyWarTask', Copy) {
     from("source")
     into("target")
     include("*.war")
 }
 
-tasks.register('removeOutput', Delete) {
+// ==============================
+// Task 3: Datei löschen
+// ==============================
+//
+// Führe `./gradlew deleteOutputTask` aus.
+// Fragen:
+// - Welche Datei wird gelöscht?
+// - In welchem Verzeichnis liegt sie?
+// - Was passiert, wenn die Datei nicht existiert?
+// - Warum ist es sinnvoll, solche Delete-Tasks im Build zu haben?
+tasks.register('deleteOutputTask', Delete) {
     delete layout.buildDirectory.file("outputs/1.txt")
 }
 
-// Führe `./gradlew hello` aus
-
-// Extend the DefaultTask class to create a HelloTask class
+// ==============================
+// Task 4: Custom DefaultTask
+// ==============================
+//
+// Führe `./gradlew customHelloTask` aus
+// Fragen:
+// - Wie unterscheidet sich diese Task von Copy/Delete?
 class HelloTask extends DefaultTask {
     @TaskAction
-    void hello() {
+    static void hello() {
         println("hello from HelloTask")
     }
 }
 
-// Register the hello Task with type HelloTask
-tasks.register("hello", HelloTask) {
+tasks.register("customHelloTask", HelloTask) {
     group = "Custom tasks"
-    description = "A lovely greeting task."
+    description = "Eine liebevolle Begrüßungs-Task"
 }
 
-// Führe `./gradlew help --task hello` aus
-
-
-// CreateAFileTask --> Now Gradle knows what the task needs and what it produces. If nothing changes, the task is skipped.
+// ==============================
+// Task 5: CreateAFileTask
+// ==============================
+//
+// Fragen:
+// - Welche Datei wird erzeugt?
+// - Wo wird sie erstellt?
+// - Welche Annotation markiert Eingabewerte?
+// - Welche markiert die Ausgabedatei?
+// - Warum sind diese Annotationen wichtig?
+// - Wird die Task erneut ausgeführt oder übersprungen, wenn der Text sich nicht ändert?
 abstract class CreateAFileTask extends DefaultTask {
     @Input
     abstract Property<String> getFileText()
@@ -90,21 +130,41 @@ abstract class CreateAFileTask extends DefaultTask {
     }
 }
 
-// Führe `gradle -q intro` aus, funktioniert das? Warum nicht?
-tasks.register('hello') {
+// ==============================
+// Task 6: introTask
+// ==============================
+//
+// Führe `gradle -q intro` aus.
+// Fragen:
+// - Wird die introTask-Task automatisch mit ausgeführt?
+// - Warum (nicht)?
+// - Was bewirkt `dependsOn`?
+// - In welcher Reihenfolge werden die Tasks ausgeführt?
+//
+// Ergänze anschließend: dependsOn tasks.introTask /
+// Was ändert sich jetzt?
+tasks.register('introTask') {
     doLast {
         println 'Hello world!'
     }
 }
 tasks.register('intro') {
-    // dependsOn tasks.hello
+    // dependsOn tasks.introTask
     doLast {
         println "I'm Gradle"
     }
 }
-// Füge `dependsOn tasks.hello` in `intro` hinzu, klappt es jetzt?
 
-// Funktioniert `taskX` wenn man `taskY` erst danach definiert?
+// ==============================
+// Task 7: taskX / taskY Reihenfolge
+// ==============================
+//
+// Frage:
+// Funktioniert taskX, obwohl taskY erst danach definiert wird?
+// Beobachtungsaufträge:
+// - Führe `./gradlew taskX` aus.
+// - Welche Ausgabe erscheint zuerst?
+// - Was sagt das über die Auswertungsphase von Gradle aus?
 tasks.register('taskX') {
     dependsOn 'taskY'
     doLast {
@@ -117,9 +177,18 @@ tasks.register('taskY') {
     }
 }
 
-// The hello task now depends on the assemble task, which means that Gradle must execute the assemble task before it can execute the hello task:
-//`./gradlew :app:hello`
-tasks.register('hello') {
+
+// ==============================
+// Task 8: helloWithAssemble
+// ==============================
+//
+// Führe `./gradlew helloWithAssemble` aus.
+// Fragen:
+// - Welche Task wird vor helloWithAssemble ausgeführt?
+// - Was macht die assemble-Task?
+// - Warum könnte es sinnvoll sein, hello davon abhängig zu machen?
+// - Welche Artefakte existieren danach im build-Ordner?
+tasks.register('helloWithAssemble') {
     group = "Custom"
     description = "A lovely greeting task."
     doLast {
@@ -128,24 +197,33 @@ tasks.register('hello') {
     dependsOn(tasks.assemble)
 }
 
-// Wir können mehrere Nacheinander ausführen, was passiert bei mehreren "doLast"?
-//(The calls doFirst and doLast can be executed multiple times. They add an action to the beginning or the end of the task’s actions list. When the task executes, the actions in the action list are executed in order. )
-tasks.register('hello') {
+// ==============================
+// Task 9: helloLifecycle
+// ==============================
+//
+// Führe `./gradlew helloLifecycle` aus.
+// Fragen:
+// - Welche Ausgabe erscheint in welcher Reihenfolge?
+// - Welche Aktion läuft ganz am Anfang?
+// - Welche ganz am Ende?
+// - Was passiert, wenn du ein weiteres doFirst hinzufügst?
+// - Wie verwaltet Gradle die Aktionsliste intern?
+tasks.register('helloLifecycle') {
     doLast {
         println 'Hello Earth'
     }
 }
-tasks.named('hello') {
+tasks.named('helloLifecycle') {
     doFirst {
         println 'Hello Venus'
     }
 }
-tasks.named('hello') {
+tasks.named('helloLifecycle') {
     doLast {
         println 'Hello Mars'
     }
 }
-tasks.named('hello') {
+tasks.named('helloLifecycle') {
     doLast {
         println 'Hello Jupiter'
     }
