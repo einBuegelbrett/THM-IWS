@@ -1,84 +1,57 @@
 package block_3
 
 /**
- * Implementiere eine Methode, die den Städtenamen eines Users zurückgibt.
- *
- * Anforderungen:
- * - Gibt den Städtenamen zurück, wenn alle Werte vorhanden sind
- * - Gibt "Unknown" zurück, wenn
- *   - der User null ist
- *   - die Adresse null ist
- *   - die Stadt null ist
- *
- * Java-Beispiel:
- *
- * String city;
- * if (user != null) {
- *     if (user.getAddress() != null) {
- *         if (user.getAddress().getCity() != null) {
- *             city = user.getAddress().getCity();
- *         } else {
- *             city = "Unknown";
- *         }
- *     } else {
- *         city = "Unknown";
- *     }
- * } else {
- *     city = "Unknown";
- * }
+ * AUFGABE 2: Ticket-Validierung & VIP-Check
+ * * ZIEL:
+ * Vertiefung von Ranges, dem Spread-Operator, Safe Navigation und dem DSL-Style.
+ * * ANFORDERUNGEN:
+ * 1. Implementiere 'allNames': Nutze den Spread-Operator (*.), um alle Namen zu extrahieren.
+ * 2. Achte auf null-Einträge in der Liste (Safe Navigation nutzen!).
+ * 3. Implementiere 'getVipStatus': Nutze eine Range (1..50), um den VIP-Status zu prüfen.
+ * 4. Nutze den DSL-Style, wo es in Groovy üblich ist.
  */
+
 static void main(String[] args) {
+    println "--- Aufgabe 2: Ranges, Spread & DSL ---"
 
-    println "Aufgabe Safe Navigation & Elvis"
-    println()
+    def users = [
+        new EventUser(name: "Alice", ticketId: 50),
+        new EventUser(name: "Bob", ticketId: 150), 
+        new EventUser(name: "Charlie", ticketId: 10),
+        null 
+    ]
 
-    def userWithCity = new User(
-            name: "Anna",
-            address: new Address(city: "Berlin")
-    )
+    // TODO: rufe beide Methoden auf und geben sie mit passenden Überschriften aus. Achte auf den DSL-Style. 
 
-    def userWithoutAddress = new User(
-            name: "Tom",
-            address: null
-    )
-
-    def userWithNullCity = new User(
-            name: "Eva",
-            address: new Address(city: null)
-    )
-
-    def noUser = null
-
-    println "User mit Stadt:"
-    println UserUtils.cityOf(userWithCity)
-    println()
-
-    println "User ohne Adresse:"
-    println UserUtils.cityOf(userWithoutAddress)
-    println()
-
-    println "User mit Adresse, aber ohne Stadt:"
-    println UserUtils.cityOf(userWithNullCity)
-    println()
-
-    println "User ist null:"
-    println UserUtils.cityOf(noUser)
 }
 
-class UserUtils {
-    static String cityOf(User user) {
-        user?.address?.city ?: "Unknown"
+class EventUtils {
+
+    /**
+     * Extrahiert alle Namen aus der User-Liste.
+     * Nutze Safe Navigation und den Spread-Operator.
+     */
+    static List<String> allNames(List<EventUser> users) {
+        // Die Methode hat idealerweise einen Inhalt von genau einer Zeile. 
+        // TODO: Gib eine leere Liste zurück, falls 'users' null ist (Elvis Operator)
+        
+        return [] // Platzhalter
+    }
+
+    /**
+     * Prüft das Ticket des ersten Users in der Liste.
+     */
+    static String getVipStatus(List<EventUser> users) {
+        // TODO: Entnehme alle User aus der vorherigen Methode  
+        // TODO: Erstelle eine Range von 1 bis 50, prüfe das die Userliste nicht null ist. 
+        // TODO: Prüfe mit dem 'in' Operator in einer For-Schleife, ob die ticketId in der Range liegt
+        //       Nutze dafür den Elvis-Operator, Safe Navigation und GStrings.  
+        
+        return "Noch nicht implementiert"
     }
 }
 
-/**
- * Einfache Model-Klassen
- */
-class User {
+class EventUser {
     String name
-    Address address
-}
-
-class Address {
-    String city
+    Integer ticketId
 }

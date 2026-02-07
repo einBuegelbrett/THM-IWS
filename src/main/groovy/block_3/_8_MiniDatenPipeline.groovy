@@ -1,63 +1,80 @@
 package block_3
 
+import groovy.transform.Canonical
+import groovy.transform.CompileStatic
+
 /**
- * Aufgabe Mini-Datenpipeline
+ * AUFGABE 3: Mini Data Pipeline & AST Transformations
  *
- * Ziel der Übung:
- * Arbeiten mit Collections, Closures und GStrings in Groovy.
+ * ZIEL:
+ * Fortgeschrittene Groovy-Features wie AST-Transformationen (@Canonical), 
+ * statische Kompilierung (@CompileStatic) und Closures im Methodenparameter anwenden.
  *
- * Beschreibung:
- * Gegeben ist eine Liste von Textzeilen (simulierte Datei).
- * Implementiere eine einfache Datenpipeline mit folgenden Schritten:
+ * BESCHREIBUNG:
+ * Gegeben ist eine Liste von Log-Zeilen. Diese sollen gefiltert, transformiert 
+ * und in strukturierte Objekte überführt werden.
  *
- * 1. Filter alle Zeilen, die mit "INFO" beginnen (beachte, dass einzelne Einträge `null` sein können)
- * 2. Extrahiere aus jeder gefilterten Zeile die eigentliche Nachricht (Text nach dem Doppelpunkt)
- * 3. Transformiere jede Nachricht in eine neue Zeichenkette im Format: "✔ NACHRICHT"
- *
- * Anforderungen:
- * - Verwende Safe Navigation (?.), um NullPointerExceptions zu vermeiden
- * - Verwende GStrings für die String-Erzeugung
- * - Nutze Closures zur Filterung und Transformation
+ * ANFORDERUNGEN:
+ * 1. Erstelle 'LogEntry' mit der passenden Annotation für automatische Konstruktoren/toString.
+ * 2. Optimiere 'PipelineProcessor' für maximale Performance durch statische Typprüfung.
+ * 3. Implementiere die 'process'-Methode:
+ * - Sicherer Umgang mit null-Werten (Liste & Einträge).
+ * - Filter: Nur Zeilen, die mit "INFO" beginnen.
+ * - Transformation: Nutze die übergebene Closure für die Nachricht. Die erste Ausgabe soll so aussehen: "INFO [1]: GROOVY IST COOL". 
+ * - Rückgabe: Eine Liste von 'LogEntry'-Objekten. ()
+ * 4. Nutze in der 'main' GStrings für die finale Formatierung.
  */
 
 static void main(String[] args) {
+    println "--- AUFGABE 3: Pipeline mit AST & Closures ---"
+    println()
 
     // Simulierte Datei
     def lines = [
             "INFO: Groovy ist cool",
-            "DEBUG: Details",
-            "ERROR: Etwas ging schief",
+            "DEBUG: Suche nach Fehlern...",
+            "INFO: Workshop macht Spaß",
+            "ERROR: Verbindung verloren",
             null,
-            "INFO: Lernen ist toll"
+            "INFO: Kaffee-Pause einlegen",
+            "DEBUG: Cache geleert",
+            "INFO: Fast fertig mit der Aufgabe",
+            "WARN: Speicher fast voll",
+            "INFO: Lernen ist toll",
+            "", 
+            "INFO: Das ist der letzte Eintrag"
     ]
 
-    println "Aufgabe Mini-Datenpipeline"
-    println()
+    // TODO: Rufe PipelineProcessor.process auf.
+    // Übergib die Liste und eine Closure, die den Text transformiert (wie der Counter funktioniert ist Ihnen überlassen).
+    def result = [] // Implementiere den Aufruf hier
 
-    def result = MiniPipeline.process(lines)
-
-    println "Ergebnis:"
-    result.eachWithIndex { entry, i ->
-        println "${i + 1}. ${entry}"
+    println "Verarbeitete Ergebnisse:"
+    result?.each { entry ->
+        println entry
     }
 }
 
+/**
+ * 1. TODO: Erstelle die Klasse LogEntry. 
+ * Nutze hier eine AST-Transformation für automatische 
+ * Konstruktoren und eine saubere toString()-Ausgabe 
+ */
 
-class MiniPipeline {
-    static List<String> process(List<String> lines) {
-        if (lines == null) {
-            return []
-        }
 
-        // Mini-Datenpipeline
-        lines
-        // 1. Filtern (Safe Navigation)
-            .findAll { it?.startsWith("INFO") }
+/**
+ * 2. TODO: Erzwinge hier statische Typprüfung (Performance).
+ */
+class PipelineProcessor {
 
-        // 2. Transformieren
-            .collect { line ->
-                def message = line.split(":")[1].trim()
-                "✔ ${message.toUpperCase()}".toString()   // GString
-            }
+    /**
+     * 3. TODO: Implementiere die Datenpipeline.
+     * @param lines Die Liste der Rohdaten
+     * @param transformLogic Eine Closure, die einen String transformiert
+     */
+    static List<LogEntry> process(List<String> lines, Closure<String> transformLogic) {
+        // TODO: Implementiere die Logik. Achte auf null Einträge und nutze Closures für die verwendeten Methoden. 
+        
+        return [] // Platzhalter
     }
 }
