@@ -35,4 +35,22 @@ class MapTransformierenSpecification extends Specification {
                 ORANGE: 1.5
         ]
     }
+
+    def "Aufgabe Abweichungen vom Durchschnitt"() {
+        given:
+        def prices = [
+                apple : 1.2,
+                banana: 0.8,
+                orange: 1.5,
+                mango : 2.5
+        ]
+
+        expect:
+        MapTransformer.priceDeviation(prices) == [
+                apple : -0.3,
+                banana: -0.7,
+                orange: 0.0,
+                mango: 1.0
+        ]
+    }
 }

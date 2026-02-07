@@ -9,6 +9,7 @@ package block_2
 static void main(String[] args) {
     def numbers = [1,2,3,4,5]
     def words = ["Groovy", "Java", "Kotlin", "Go", "Scala"]
+    def numbersUnsorted = [5,7,1,3]
 
     println "Aufgabe Ungerade Zahlen:"
     println ListFilter.oddNumbers(numbers)
@@ -20,6 +21,9 @@ static void main(String[] args) {
 
     println "Aufgabe Wörter mit mehr als 4 Buchstaben:"
     println ListFilter.wordsLongerThanFour(words)
+
+    println "Aufgabe Zahlen filtern und verarbeiten:"
+    println ListFilter.processNumbers(numbersUnsorted)
 }
 
 class ListFilter {
@@ -60,5 +64,22 @@ class ListFilter {
      */
     static List<String> wordsLongerThanFour(List<String> words) {
         words.findAll { it.length() > 4 }
+    }
+
+    /**
+     * Alle Zahlen größer als 2 filtern, quadrieren und aufsteigend sortieren
+     *
+     * for (int n : numbers) {
+     *     if (n > 2) {
+     *         result.add(n * n);
+     *     }
+     * }
+     * Collections.sort(result);
+     */
+    static List<Integer> processNumbers(List<Integer> numbers) {
+        numbers
+            .findAll { it > 2 }
+            .collect { it * it }
+            .sort()
     }
 }

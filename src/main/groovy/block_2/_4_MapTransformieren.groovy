@@ -25,6 +25,9 @@ static void main(String[] args) {
     println "Aufgabe Produktnamen in Großbuchstaben:"
     println MapTransformer.uppercaseKeys(prices)
     println()
+
+    println "Aufgabe Abweichung vom Durchschnitt:"
+    println MapTransformer.priceDeviation(prices)
 }
 
 class MapTransformer {
@@ -74,5 +77,31 @@ class MapTransformer {
         prices.collectEntries { key, value ->
             [(key.toUpperCase()): value]
         }
+    }
+
+    /**
+     * Für alle Produkte Abweichung vom Durchschnitt berechnen
+     *
+     * BigDecimal sum = BigDecimal.ZERO;
+     *
+     * for (BigDecimal price : prices.values()) {
+     *     sum = sum.add(price);
+     * }
+     *
+     * BigDecimal average = sum.divide(BigDecimal.valueOf(prices.size()));
+     *
+     * Map<String, BigDecimal> result = new HashMap<>();
+     * for (Map.Entry<String, BigDecimal> entry : prices.entrySet()) {
+     *     BigDecimal deviation = entry.getValue().subtract(average);
+     *     result.put(entry.getKey(), deviation);
+     * }
+     */
+    static Map<String, BigDecimal> priceDeviation(Map<String, BigDecimal> prices) {
+        def average = prices.values().sum() / prices.size()
+
+        prices
+            .collectEntries { key, value ->
+                [(key): (value - average)]
+            }
     }
 }
