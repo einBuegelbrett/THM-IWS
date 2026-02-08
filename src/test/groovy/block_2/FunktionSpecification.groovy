@@ -4,37 +4,42 @@ import spock.lang.Specification
 
 class FunktionSpecification extends Specification {
 
-    // -------- Aufgabe greet --------
+    // -------- Aufgabe welcome --------
 
-    def "greet() verwendet den Default-Namen 'World'"() {
+    def "welcome() verwendet den Default-Namen 'Groover'"() {
         expect:
-        Funktion.greet() == "Hello World"
+        Funktion.welcome() == "Welcome to the groove, Groover!"
     }
 
-    def "greet(name) verwendet den übergebenen Namen"() {
+    def "welcome(name) verwendet den übergebenen Namen"() {
         expect:
-        Funktion.greet("Clara") == "Hello Clara"
+        Funktion.welcome("Clara") == "Welcome to the groove, Clara!"
     }
 
     // -------- Aufgabe greetInLanguage --------
 
-    def "greetInLanguage() nutzt Default-Werte (World, en)"() {
+    def "greetInLanguage() nutzt Default-Werte (Groover, en)"() {
         expect:
-        Funktion.greetInLanguage() == "Hello World"
+        Funktion.greetInLanguage() == "Hello Groover, feel the groove!"
     }
 
     def "greetInLanguage(name) nutzt Default-Sprache Englisch"() {
         expect:
-        Funktion.greetInLanguage("Anna") == "Hello Anna"
+        Funktion.greetInLanguage("Anna") == "Hello Anna, feel the groove!"
     }
 
-    def "greetInLanguage(name, es) gibt spanische Begrüßung zurück"() {
+    def "greetInLanguage(name, es) gibt spanische Groove-Begrüßung zurück"() {
         expect:
-        Funktion.greetInLanguage("Luis", "es") == "Hola Luis"
+        Funktion.greetInLanguage("Luis", "es") == "Hola Luis, siente el groove!"
     }
 
-    def "greetInLanguage(name, de) gibt deutsche Begrüßung zurück"() {
+    def "greetInLanguage(name, de) gibt deutsche Groove-Begrüßung zurück"() {
         expect:
-        Funktion.greetInLanguage("Clara", "de") == "Hallo Clara"
+        Funktion.greetInLanguage("Clara", "de") == "Hallo Clara, fühl den Groove!"
+    }
+
+    def "greetInLanguage(name, fr) gibt französische Groove-Begrüßung zurück"() {
+        expect:
+        Funktion.greetInLanguage("Luis", "fr") == "Bonjour Luis, sentir le groove!"
     }
 }

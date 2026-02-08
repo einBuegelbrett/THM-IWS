@@ -5,14 +5,16 @@ package block_2
 /**
  * Aufgabe 4:
  * Schreibe Funktionen mit Default-Parametern
+ * Thema: Groovy Vibes
  */
 static void main(String[] args) {
-    println "Aufgabe Begrüßung mit Default-Namen:"
-    println Funktion.greet()
-    println Funktion.greet("Clara")
+
+    println "Aufgabe Groove-Intro:"
+    println Funktion.welcome()
+    println Funktion.welcome("Clara")
     println()
 
-    println "Aufgabe Begrüßung mit Sprache:"
+    println "Aufgabe Groove-Greeting in verschiedenen Sprachen:"
     println Funktion.greetInLanguage()
     println Funktion.greetInLanguage("Anna")
     println Funktion.greetInLanguage("Luis", "es")
@@ -22,37 +24,43 @@ static void main(String[] args) {
 class Funktion {
 
     /**
-     * Begrüßt eine Person.
-     * Standardname ist "World".
+     * Begrüßt jemanden zur Session.
+     * Standard-Name ist "Groover".
      *
-     * Beispiel:
-     * greet()        -> "Hello World"
-     * greet("Clara")  -> "Hello Clara"
+     * Beispiele:
+     * welcome() -> "Welcome to the groove, Groover!"
+     * welcome("Clara") -> "Welcome to the groove, Clara!"
      */
-    static String greet(String name = "World") {
-        "Hello ${name}"
+    static String welcome(String name = "Groover") {
+        "Welcome to the groove, ${name}!"
     }
 
     /**
-     * Begrüßt eine Person in einer bestimmten Sprache
+     * Begrüßt jemanden im Groove – abhängig von der Sprache.
      *
-     * Default:
-     * name = "World"
+     * Defaults:
+     * name = "Groover"
      * language = "en"
      *
      * Optionen: de, es, fr, en
      *
      * Beispiele:
-     * greetInLanguage() -> "Hello World"
-     * greetInLanguage("Anna") -> "Hello Anna"
-     * greetInLanguage("Luis", "es") -> "Hola Luis"
+     * greetInLanguage() -> "Hello Groover, feel the groove!"
+     * greetInLanguage("Anna") -> "Hello Anna, feel the groove!"
+     * greetInLanguage("Anna", "de") -> "Hallo Anna, fühl den groove!"
+     * greetInLanguage("Luis", "es") -> "Hola Luis, siente el groove!"
+     * greetInLanguage("Luis", "fr") -> "Bonjour Luis, sentir le groove!"
      */
-    static String greetInLanguage(String name = "World", String language = "en") {
+    static String greetInLanguage(String name = "Groover", String language = "en") {
         switch (language) {
-            case "de": return "Hallo ${name}"
-            case "es": return "Hola ${name}"
-            case "fr": return "Bonjour ${name}"
-            default:   return "Hello ${name}"
+            case "de":
+                return "Hallo ${name}, fühl den Groove!"
+            case "es":
+                return "Hola ${name}, siente el groove!"
+            case "fr":
+                return "Bonjour ${name}, sentir le groove!"
+            default:
+                return "Hello ${name}, feel the groove!"
         }
     }
 }
