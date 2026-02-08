@@ -27,4 +27,12 @@ class ListeFilternSpecification extends Specification {
         expect:
         ListFilter.wordsLongerThanFour(words) == ["Groovy", "Kotlin", "Scala"]
     }
+
+    def "Aufgabe Alle Zahlen größer als 2 filtern, quadrieren und sortieren"() {
+        given:
+        def numbers = [9, 7, 1, 3, 5]
+
+        expect:
+        ListFilter.processNumbers(numbers) == [9, 25, 49, 81]
+    }
 }

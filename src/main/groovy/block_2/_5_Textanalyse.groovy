@@ -19,8 +19,8 @@ static void main(String[] args) {
     println TextAnalysis.countWord(text, "Groovy")
     println()
 
-    println "Aufgabe Wort-Häufigkeiten:"
-    println TextAnalysis.wordFrequencies(text)
+    println "Aufgabe Wörter mit Mindestanzahl an Zeichen:"
+    println TextAnalysis.wordsLongerThan(text, 4)
 }
 
 
