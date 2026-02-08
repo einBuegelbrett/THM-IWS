@@ -1,0 +1,26 @@
+plugins {
+    id 'groovy'
+    id 'application'
+}
+
+application {
+    mainClass = 'Main'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.apache.groovy:groovy:4.0.21'
+    testImplementation 'org.spockframework:spock-core:2.4-M1-groovy-4.0'
+}
+
+tasks.register('markdownToHtml') {
+    group = 'documentation'
+    description = 'Converts Markdown to HTML'
+
+    doLast {
+        println 'Markdown → HTML conversion task executed.'
+    }
+}
