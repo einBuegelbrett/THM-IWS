@@ -40,7 +40,7 @@ class ListFilter {
      * }
      */
     static List<Integer> oddNumbers(List<Integer> list) {
-        
+        list.findAll { it % 2 }
     }
 
     /**
@@ -53,7 +53,7 @@ class ListFilter {
      * }
      */
     static List<String> wordsLongerThanFour(List<String> words) {
-        
+        words.findAll { it.length() > 4 }
     }
 
     /**
@@ -67,7 +67,10 @@ class ListFilter {
      * Collections.sort(result);
      */
     static List<Integer> processNumbers(List<Integer> numbers) {
-        
+        numbers
+            .findAll { it > 2 }
+            .collect { it * it }
+            .sort()
     }
 
     /**
@@ -86,6 +89,9 @@ class ListFilter {
     *     .collect(Collectors.toList());
     */
     static List<Integer> selectedUniqueNumbers(List<Integer> numbers, List<Integer> allowed ) {
-        
+        numbers
+            .findAll { allowed.contains(it) }
+            .unique()
+            .sort()
     }
 }
