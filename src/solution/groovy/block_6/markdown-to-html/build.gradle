@@ -3,24 +3,62 @@ plugins {
     id 'application'
 }
 
-application {
-    mainClass = 'Main'
-}
+group = 'de.thm.workshop'
+version = '1.0.0'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation 'org.apache.groovy:groovy:4.0.21'
-    testImplementation 'org.spockframework:spock-core:2.4-M1-groovy-4.0'
+    implementation 'org.apache.groovy:groovy:5.0.0'
+}
+
+application {
+    mainClass = 'App'
 }
 
 tasks.register('markdownToHtml') {
-    group = 'documentation'
-    description = 'Converts Markdown to HTML'
+    group = "Markdown"
+    description = "Converts Markdown files into groovy HTML 🕺"
 
     doLast {
-        println 'Markdown → HTML conversion task executed.'
+
+        def inputDir = file("input")
+        def outputDir = file("output")
+
+        if (!inputDir.exists()) {
+            println "Input directory not found: $inputDir"
+            return
+        }
+
+        outputDir.mkdirs()
+
+        def converter = new MarkdownConverter()
+
+        def files = inputDir.listFiles()
+                .findAll { it.name.endsWith(".md") }
+
+        if (!files) {
+            println "⚠No Markdown files found."
+            return
+        }
+
+        println "Converting ${files.size()} file(s)..."
+
+        files.each { file ->
+
+            println "🎶 Processing: $file.name"
+
+            def text = file.text
+            def html = converter.convert(text)
+
+            def outputFile =
+                    new File(outputDir, file.name.replace(".md", ".html"))
+
+            outputFile.text = html
+        }
+
+        println "Conversion finished. Stayin' Alive!"
     }
 }
