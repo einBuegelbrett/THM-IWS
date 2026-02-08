@@ -83,6 +83,8 @@ Task ausführen
 ./gradlew markdownToHtml
 ```
 
+Viel Erfolg! https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1
+
 ## Bonus (optional)
 - Leere Zeilen ignorieren
 - \### als <h3> unterstützen
