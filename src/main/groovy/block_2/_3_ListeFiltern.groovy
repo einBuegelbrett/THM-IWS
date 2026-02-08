@@ -15,15 +15,18 @@ static void main(String[] args) {
     println ListFilter.oddNumbers(numbers)
     println()
 
-    println "Aufgabe Zahlen größer als 3:"
-    println ListFilter.greaterThanThree(numbers)
-    println()
-
     println "Aufgabe Wörter mit mehr als 4 Buchstaben:"
     println ListFilter.wordsLongerThanFour(words)
 
     println "Aufgabe Zahlen filtern und verarbeiten:"
     println ListFilter.processNumbers(numbersUnsorted)
+    println()
+
+    println "Aufgabe Bestimmte Zahlen eindeutig sortieren:"
+    println ListFilter.selectedUniqueNumbers(
+            [1, 2, 2, 3, 4, 5, 5, 6],
+            [2, 4, 6, 8]
+    )
 }
 
 class ListFilter {
@@ -38,19 +41,6 @@ class ListFilter {
      */
     static List<Integer> oddNumbers(List<Integer> list) {
         list.findAll { it % 2 }
-    }
-
-    /**
-     * Alle Zahlen größer als 3 filtern
-     *
-     * for (int n : numbers) {
-     *     if (n > 3) {
-     *         result.add(n);
-     *     }
-     * }
-     */
-    static List<Integer> greaterThanThree(List<Integer> numbers) {
-        numbers.findAll { it > 3 }
     }
 
     /**
@@ -80,6 +70,28 @@ class ListFilter {
         numbers
             .findAll { it > 2 }
             .collect { it * it }
+            .sort()
+    }
+
+    /**
+    * Alle Zahlen auswählen, die in der zweiten Liste enthalten sind,
+    * Duplikate entfernen und aufsteigend sortieren
+    *
+    * for (int n : numbers) {
+    *     if (allowed.contains(n)) {
+    *         result.add(n);
+    *     }
+    * }
+    *
+    * result = result.stream()
+    *     .distinct()
+    *     .sorted()
+    *     .collect(Collectors.toList());
+    */
+    static List<Integer> selectedUniqueNumbers(List<Integer> numbers, List<Integer> allowed ) {
+        numbers
+            .findAll { allowed.contains(it) }
+            .unique()
             .sort()
     }
 }
