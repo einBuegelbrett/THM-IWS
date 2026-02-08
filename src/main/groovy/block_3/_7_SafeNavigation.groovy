@@ -15,9 +15,9 @@ static void main(String[] args) {
     println "--- Aufgabe 2: Ranges, Spread & DSL ---"
 
     def users = [
-        new EventUser(name: "Alice", ticketId: 50),
+        new EventUser(name: "Joe", ticketId: 50),
         new EventUser(name: "Bob", ticketId: 150), 
-        new EventUser(name: "Charlie", ticketId: 10),
+        new EventUser(name: "Jacqueline", ticketId: 10),
         null 
     ]
 
@@ -35,7 +35,7 @@ class EventUtils {
         // Die Methode hat idealerweise einen Inhalt von genau einer Zeile. 
         // TODO: Gib eine leere Liste zurück, falls 'users' null ist (Elvis Operator)
         
-        return [] // Platzhalter
+        [] // Platzhalter
     }
 
     /**

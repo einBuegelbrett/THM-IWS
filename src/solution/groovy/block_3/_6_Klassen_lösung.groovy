@@ -1,13 +1,9 @@
 package block_3
 
 /**
- * AUFGABE 1: Der Festival-Groover
- * * ZIEL:
- * Kennenlernen von Groovy-Klassen, GStrings und der vereinfachten Methoden-Syntax.
- * * ANFORDERUNGEN:
- * 1. Implementiere 'vibeStatus': Nutze GStrings für die Ausgabe.
- * 2. Implementiere 'isReadyToParty': Nutze den Implizit Return (kein 'return' nötig).
- * 3. Implementiere 'festivalCard': Kombiniere Methodenaufrufe innerhalb eines GStrings.
+ * LÖSUNG AUFGABE 1: Der Festival-Groover
+ * * ZIEL: 
+ * Klassen-Basics, GStrings und Kurzschreibweisen.
  */
 static void main(String[] args) {
 
@@ -53,42 +49,31 @@ class Groover {
     List<String> setlist = []
 
     /**
-     * Gibt den Status zurück.
-     * z.B. "Jimi rockt die Stratocaster"
+     * Nutzt GStrings zur Verkettung.
+     * In Groovy ist kein 'return' nötig, das letzte Statement zählt.
      */
     String vibeStatus() {
-        // TODO: Nutze GStrings (Anführungszeichen wichtig!)
-        "" 
+        "$stageName rockt die $instrument" 
     }
 
     /**
-     * Prüft, ob das vibeLevel hoch genug für die Party ist (>= 80)
+     * Einfacher Vergleich. Das Ergebnis (boolean) wird automatisch zurückgegeben.
      */
     boolean isReadyToParty() {
-        // TODO: Implementiere den Check (Implizit Return nutzen!)
-        false 
+        vibeLevel >= 80 
     }
 
-    /**
-     * Gibt eine Beschreibung zurück.
-     * z.B. "Jimi rockt die Stratocaster (Vibe: 90%)"
-     */
-    String festivalCard() {
-        // TODO: Nutze vibeStatus() innerhalb dieses GStrings
-        ""
-    }
-
-
-    /**
-     * Erstelle eine Ausgabe für den ersten Song und die Anzahl der Songs 
-     * z.B. "Blue Grooved" als erster Song 
-     */
     String getOpeningSong() {
-        ""
+        setlist ? setlist[0] : "Noch keine Songs"
     }
 
     int countSongs() {
-            // TODO: Gib die Anzahl der Songs zurück
-            ""
+            setlist.size()
+        }
+    /**
+     * Kombination aus Methodenaufruf und Variable innerhalb eines GStrings.
+     */
+    String festivalCard() {
+        "${vibeStatus()} (Vibe: $vibeLevel%)"
     }
 }

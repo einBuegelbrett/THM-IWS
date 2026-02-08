@@ -4,59 +4,59 @@ import groovy.transform.Canonical
 import groovy.transform.CompileStatic
 
 /**
- * AUFGABE 3: Mini Data Pipeline & AST Transformations
+ * AUFGABE 3: Festival-Funk & AST Transformations
  *
  * ZIEL:
  * Fortgeschrittene Groovy-Features wie AST-Transformationen (@Canonical), 
  * statische Kompilierung (@CompileStatic) und Closures im Methodenparameter anwenden.
  *
  * BESCHREIBUNG:
- * Gegeben ist eine Liste von Log-Zeilen. Diese sollen gefiltert, transformiert 
- * und in strukturierte Objekte überführt werden.
+ * Gegeben ist eine Liste von Funksprüchen aus dem Backstage-Bereich. Diese sollen gefiltert, 
+ * transformiert und in strukturierte 'RadioLog' Objekte überführt werden.
  *
  * ANFORDERUNGEN:
- * 1. Erstelle 'LogEntry' mit der passenden Annotation für automatische Konstruktoren/toString.
- * 2. Optimiere 'PipelineProcessor' für maximale Performance durch statische Typprüfung.
+ * 1. Erstelle 'RadioLog' mit der passenden Annotation für automatische Konstruktoren/toString.
+ * 2. Optimiere 'PipelineProcessor' für bessere Performance durch statische Typprüfung.
  * 3. Implementiere die 'process'-Methode:
  * - Sicherer Umgang mit null-Werten (Liste & Einträge).
- * - Filter: Nur Zeilen, die mit "INFO" beginnen.
- * - Transformation: Nutze die übergebene Closure für die Nachricht. Die erste Ausgabe soll so aussehen: "INFO [1]: GROOVY IST COOL". 
- * - Rückgabe: Eine Liste von 'LogEntry'-Objekten. ()
+ * - Filter: Nur Funksprüche, die mit "STAGE" beginnen.
+ * - Transformation: Nutze die übergebene Closure für die Nachricht. Die erste Ausgabe soll so aussehen: "STAGE [1]: MIC CHECK 1-2". 
+ * - Rückgabe: Eine Liste von 'RadioLog'-Objekten.
  * 4. Nutze in der 'main' GStrings für die finale Formatierung.
  */
 
 static void main(String[] args) {
-    println "--- AUFGABE 3: Pipeline mit AST & Closures ---"
+    println "--- AUFGABE 3: Festival-Pipeline mit AST & Closures ---"
     println()
 
-    // Simulierte Datei
-    def lines = [
-            "INFO: Groovy ist cool",
-            "DEBUG: Suche nach Fehlern...",
-            "INFO: Workshop macht Spaß",
-            "ERROR: Verbindung verloren",
+    // Simulierter Funkverkehr
+    def messages = [
+            "STAGE: Mic Check 1-2",
+            "SECURITY: Eingang West überfüllt",
+            "STAGE: Gitarre von Slash stimmen",
+            "CATERING: Pizza für Backstage ist da",
             null,
-            "INFO: Kaffee-Pause einlegen",
-            "DEBUG: Cache geleert",
-            "INFO: Fast fertig mit der Aufgabe",
-            "WARN: Speicher fast voll",
-            "INFO: Lernen ist toll",
+            "STAGE: Nebelmaschine auffüllen",
+            "SECURITY: Moshpit wird wild",
+            "STAGE: Monitor-Mix anpassen",
+            "VIP: Champagner ist leer",
+            "STAGE: Show startet in 5 Minuten",
             "", 
-            "INFO: Das ist der letzte Eintrag"
+            "STAGE: Pyrotechnik bereit"
     ]
 
     // TODO: Rufe PipelineProcessor.process auf.
     // Übergib die Liste und eine Closure, die den Text transformiert (wie der Counter funktioniert ist Ihnen überlassen).
     def result = [] // Implementiere den Aufruf hier
 
-    println "Verarbeitete Ergebnisse:"
-    result?.each { entry ->
-        println entry
+    println "Verarbeitete Funksprüche:"
+    result?.each { logEntry ->
+        println logEntry
     }
 }
 
 /**
- * 1. TODO: Erstelle die Klasse LogEntry. 
+ * 1. TODO: Erstelle die Klasse RadioLog. 
  * Nutze hier eine AST-Transformation für automatische 
  * Konstruktoren und eine saubere toString()-Ausgabe 
  */
@@ -72,7 +72,7 @@ class PipelineProcessor {
      * @param lines Die Liste der Rohdaten
      * @param transformLogic Eine Closure, die einen String transformiert
      */
-    static List<LogEntry> process(List<String> lines, Closure<String> transformLogic) {
+    static List<RadioLog> process(List<String> lines, Closure<String> transformLogic) {
         // TODO: Implementiere die Logik. Achte auf null Einträge und nutze Closures für die verwendeten Methoden. 
         
         return [] // Platzhalter

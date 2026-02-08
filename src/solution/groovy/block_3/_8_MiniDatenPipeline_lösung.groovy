@@ -4,54 +4,44 @@ import groovy.transform.Canonical
 import groovy.transform.CompileStatic
 
 /**
- * Aufgabe: High-Performance Data Pipeline & AST Transformations
+ * LÖSUNG AUFGABE 3: Festival-Funk Pipeline & AST Transformations
  *
- * Ziel der Übung:
- * Fortgeschrittene Groovy-Features wie AST-Transformationen, statische Kompilierung 
- * und Higher-Order Functions in einer Pipeline anwenden.
- *
- * Beschreibung:
- * Gegeben ist eine Liste von Textzeilen. Diese sollen gefiltert, transformiert 
- * und in strukturierte Objekte überführt werden.
- *
- * Anforderungen:
- * 1. Nutze @Canonical für das Datenmodell 'LogEntry', um Boilerplate-Code zu sparen.
- * 2. Nutze @CompileStatic für die 'PipelineProcessor'-Klasse für maximale Performance.
- * 3. Implementiere 'process', sodass eine Closure als Transformations-Logik akzeptiert wird.
- * 4. Filter nur "INFO"-Zeilen (beachte null-Einträge mit Safe Navigation ?.).
- * 5. Verwende GStrings für die finale Formatierung der Nachricht.
+ * ZIEL:
+ * Fortgeschrittene Groovy-Features (AST, CompileStatic, Closures) in einer Pipeline anwenden.
  */
-
 
 // MUSTERLÖSUNG
 static void main(String[] args) {
-    println "--- Aufgabe: Pipeline mit AST & Closures ---"
+    println "--- LÖSUNG AUFGABE 3: Festival-Pipeline mit AST & Closures ---"
     println()
 
-    // Simulierte Datei
-    def lines = [
-            "INFO: Groovy ist cool",
-            "DEBUG: Suche nach Fehlern...",
-            "INFO: Workshop macht Spaß",
-            "ERROR: Verbindung verloren",
+    // Simulierter Funkverkehr (Rohdaten)
+    def messages = [
+            "STAGE: Mic Check 1-2",
+            "SECURITY: Eingang West überfüllt",
+            "STAGE: Gitarre von Slash stimmen",
+            "CATERING: Pizza für Backstage ist da",
             null,
-            "INFO: Kaffee-Pause einlegen",
-            "DEBUG: Cache geleert",
-            "INFO: Fast fertig mit der Aufgabe",
-            "WARN: Speicher fast voll",
-            "INFO: Lernen ist toll",
-            "", // Leere Zeile zum Testen der Robustheit
-            "INFO: Das ist der letzte Eintrag"
+            "STAGE: Nebelmaschine auffüllen",
+            "SECURITY: Moshpit wird wild",
+            "STAGE: Monitor-Mix anpassen",
+            "VIP: Champagner ist leer",
+            "STAGE: Show startet in 5 Minuten",
+            "", 
+            "STAGE: Pyrotechnik bereit"
     ]
 
-    def counter = 1
-    // Aufruf der Pipeline mit einer Closure als Parameter (Higher-Order Function)
-    // Hier definieren wir ad-hoc, wie die Nachricht transformiert werden soll
-    def result = PipelineProcessor.process(lines) { String msg ->
-        "INFO [${counter++}]: ${msg.toUpperCase()}"
+    def radioCounter = 1
+    
+    /**
+     * Aufruf der Pipeline:
+     * Wir filtern nur "STAGE"-Sprüche und transformieren sie in Großbuchstaben mit Nummerierung.
+     */
+    def result = PipelineProcessor.process(messages) { String msg ->
+        "STAGE [${radioCounter++}]: ${msg.toUpperCase()}"
     }
 
-    println "Verarbeitete Ergebnisse:"
+    println "Verarbeitete Funksprüche:"
     result.each { entry ->
         // Dank @Canonical wird hier eine saubere toString-Repräsentation ausgegeben
         println entry
@@ -59,41 +49,43 @@ static void main(String[] args) {
 }
 
 /**
- * Modell-Klasse mit AST-Transformation
+ * Modell-Klasse mit AST-Transformation.
+ * Erzeugt automatisch Konstruktoren, toString, equals und hashCode.
  */
 @Canonical
-class LogEntry {
-    String level
-    String message
+class RadioLog {
+    String type
+    String content
 }
 
 /**
- * Utility-Klasse mit statischer Typprüfung
+ * Utility-Klasse mit statischer Typprüfung für maximale Performance.
  */
 @CompileStatic
 class PipelineProcessor {
 
     /**
-     * Verarbeitet die Zeilen. Akzeptiert eine Liste und eine Closure für die Transformation.
+     * Verarbeitet die Funksprüche.
+     * Filtert nach "STAGE", bereinigt die Daten und wendet die Transformations-Logik an.
      */
-    static List<LogEntry> process(List<String> lines, Closure<String> transformLogic) {
+    static List<RadioLog> process(List<String> lines, Closure<String> transformLogic) {
         if (lines == null) return []
 
         lines
-            // 1. Filtern (Safe Navigation für null-Einträge)
-            .findAll { String it -> it?.startsWith("INFO") }
+            // 1. Filtern: Nur Stage-Events (Safe Navigation für null-Einträge)
+            .findAll { String it -> it?.startsWith("STAGE") }
             
             // 2. Transformieren & Objekt-Erzeugung
             .collect { String line ->
                 def parts = line.split(":")
-                def level = parts[0].trim()
-                def rawMessage = parts[1].trim()
+                def type = parts[0].trim()
+                def rawMsg = parts.size() > 1 ? parts[1].trim() : ""
 
-                // Die übergebene Closure wird ausgeführt
-                def finalMessage = transformLogic(rawMessage)
+                // Die übergebene Closure (transformLogic) wird hier ausgeführt
+                def finalMsg = transformLogic(rawMsg)
 
                 // Nutzt den von @Canonical generierten Konstruktor
-                new LogEntry(level, finalMessage)
+                new RadioLog(type, finalMsg)
             }
     }
 }
