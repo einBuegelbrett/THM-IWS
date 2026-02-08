@@ -32,22 +32,22 @@ application {
 }
 
 // ==============================
-// Task 1: Begrüßung
+// Task 1: Disco-Begrüßung
 // ==============================
 //
-// Führe `./gradlew greetTask` aus.
+// Führe `./gradlew discoGreet` aus.
 // Fragen:
 // - Was gibt die Task aus?
 // - In welchem Build-Ordner erscheinen Änderungen?
 // - Welche Vorteile hat es, solche kleine Tasks zu erstellen?
-tasks.register('greetTask') {
-    description = "Gibt eine Begrüßung aus"
-    group = "Workshop"
+tasks.register('discoGreet') {
+    description = "Gibt eine funkige Disco-Begrüßung aus"
+    group = "DiscoWorkshop"
 
     doLast {
-        println "Hello from Gradle"
-        println "Projekt: $project.name"
-        println "Version: $version"
+        println "🕺 Welcome to the Groovy Disco Workshop! 💃"
+        println "Projekt: $project.name - Let’s boogie!"
+        println "Version: $version - Hotter than a Saturday Night Fever!"
     }
 }
 
@@ -104,7 +104,7 @@ tasks.register('introTask') {
 tasks.register('intro') {
     // dependsOn tasks.introTask
     doLast {
-        println "✨ Ah ah ah ah Stayin’ alive ✨"
+        println "🎶 Ah ah ah ah Stayin’ alive, stayin’ alive! 🎶"
     }
 }
 
