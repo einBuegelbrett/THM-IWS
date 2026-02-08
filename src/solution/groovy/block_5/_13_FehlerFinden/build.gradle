@@ -3,54 +3,64 @@ package block_5._13_FehlerFinden
 plugins {
     id 'groovy'
     id 'application'
-    id 'java-library'
+    id 'java-library'  // unnötig / verwirrend
 }
 
 group = 'de.thm.workshop'
-version = 1.0
+version = 1.0   // sollte String sein
 
 repositories {
-    mavenCentral()
+    mavenCentral() // Lokale Library 'does:exist:LOCAL' aber kein mavenLocal()
 }
 
 dependencies {
     implementation 'org.apache.groovy:groovy:5.0.0'
-    testImplementation 'org.spockframework:spock-core:2.4-groovy-4.0'
-    testImplementation 'does:not-exist:1.0'
+    testImplementation 'org.spockframework:spock-core:2.4-groovy-4.0' // alte/falsche Groovy-Version
+    testImplementation 'does:not-exist:1.0' // Dependency existiert nicht
     implementation 'de.thm:does-exist:LOCAL'
 }
 
 application {
-    mainClass = block_1.Main
+    mainClass = block_1.Main  // kein String
 }
 
+// Task 1: Syntaxfehler
 tasks.register('brokenTask') {
+    // doLast erwartet Closure, keine runden Klammern
     doLast(
             println "Dieser Task ist kaputt"
     )
 }
 
+// task 2: Dateierstellung (kaputt)
 tasks.register('createInfoFile') {
 
     doLast {
 
+        // buildDir deprecated
         def outputFile = file("$buildDir/info.txt")
 
+        // mkdirs fehlt → Ordner evtl. nicht vorhanden
         def content = """
             Projekt: $project.name
             Version: $project.version
             Datum: ${new Date()}
             """
 
+        // file.text ohne Datei existiert
         outputFile.text = content
     }
 }
 
+// task 3: Pipeline (stark fehlerhaft)
 tasks.register('generateNumbers') {
 
     doLast {
         def file = file("$layout.buildDirectory/numbers.txt")
 
+        // parentFile.mkdirs() fehlt
+
+        // Range falsch (String statt Zahlen)
         def numbers = ("1".."10").join("\n")
 
         file.text = numbers
@@ -58,22 +68,27 @@ tasks.register('generateNumbers') {
 }
 
 tasks.register('processNumbers') {
+    // Falscher Taskname
     dependsOn 'generateNumber'
 
     doLast {
-        def inputFile = file("$layout.buildDirectory/number.txt")
+        def inputFile = file("$layout.buildDirectory/number.txt")   // falscher Dateiname
         def outputFile = file("$layout.buildDirectory/evenNumbers.txt")
 
+        // Datei evtl. nicht vorhanden
         def numbers = inputFile.readLines()
 
+        // String → kein Integer Cast
         def evenNumbers = numbers.findAll {
             it % 2 == 0
         }
 
+        // join fehlt
         outputFile.text = evenNumbers
     }
 }
 
+// Task doppelt registriert
 tasks.register('brokenTask') {
     doLast {
         println "Ich überschreibe den anderen Task!"

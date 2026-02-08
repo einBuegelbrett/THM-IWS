@@ -1,0 +1,150 @@
+package block_bonus.gradle_aufgaben
+
+// Aufgaben zu: Build Skript Lesen
+
+// ==============================
+// Task 1: Custom DefaultTask
+// ==============================
+//
+// Führe `./gradlew customHelloTask` aus
+// Fragen:
+// - Wie unterscheidet sich diese Task von Copy/Delete?
+class HelloTask extends DefaultTask {
+    @TaskAction
+    static void hello() {
+        println("hello from HelloTask")
+    }
+}
+
+tasks.register("customHelloTask", HelloTask) {
+    group = "Custom tasks"
+    description = "Eine liebevolle Begrüßungs-Task"
+}
+
+// ==============================
+// Task 2: CreateAFileTask
+// ==============================
+//
+// Fragen:
+// - Welche Datei wird erzeugt?
+// - Wo wird sie erstellt?
+// - Welche Annotation markiert Eingabewerte?
+// - Welche markiert die Ausgabedatei?
+// - Warum sind diese Annotationen wichtig?
+// - Wird die Task erneut ausgeführt oder übersprungen, wenn der Text sich nicht ändert?
+abstract class CreateAFileTask extends DefaultTask {
+    @Input
+    abstract Property<String> getFileText()
+
+    @Input
+    final String fileName = "myfile.txt"
+
+    @OutputFile
+    final File myFile = new File(fileName)
+
+    @TaskAction
+    void action() {
+        myFile.createNewFile()
+        myFile.text = fileText.get()
+    }
+}
+
+// ==============================
+// Task 3: taskX / taskY Reihenfolge
+// ==============================
+//
+// Frage:
+// Funktioniert taskX, obwohl taskY erst danach definiert wird?
+// Beobachtungsaufträge:
+// - Führe `./gradlew taskX` aus.
+// - Welche Ausgabe erscheint zuerst?
+// - Was sagt das über die Auswertungsphase von Gradle aus?
+tasks.register('taskX') {
+    dependsOn 'taskY'
+    doLast {
+        println 'taskX'
+    }
+}
+tasks.register('taskY') {
+    doLast {
+        println 'taskY'
+    }
+}
+
+// ==============================
+// Task 4: helloWithAssemble
+// ==============================
+//
+// Führe `./gradlew helloWithAssemble` aus.
+// Fragen:
+// - Welche Task wird vor helloWithAssemble ausgeführt?
+// - Was macht die assemble-Task?
+// - Warum könnte es sinnvoll sein, hello davon abhängig zu machen?
+// - Welche Artefakte existieren danach im block_bonus.gradle_aufgaben.build-Ordner?
+tasks.register('helloWithAssemble') {
+    group = "Custom"
+    description = "A lovely greeting task."
+    doLast {
+        println("Hello world!")
+    }
+    dependsOn(tasks.assemble)
+}
+
+// Aufgabe zu: Eigene Tasks
+
+/**
+ * Task 3 – Schwer: Task-Pipeline
+ * Erstellt zwei neue Tasks und verknüpft sie: generateNumbers, processNumbers
+ * generateNumbers:
+ *      - Erstellt Datei block_bonus.gradle_aufgaben.build/numbers.txt
+ *      - Inhalt: Zahlen 1–10 (eine pro Zeile)
+ *      - Nutzt eine Groovy Range (1..10)
+ * processNumbers:
+ *      - Liest numbers.txt
+ *      - Filtert nur gerade Zahlen
+ *      - Schreibt Ergebnis in block_bonus.gradle_aufgaben.build/evenNumbers.txt
+ * Wichtig:
+ *      - processNumbers soll automatisch generateNumbers ausführen
+ *      - Nutzt dependsOn
+ */
+
+// Generiert Zahlen 1–10 in Datei
+tasks.register('generateNumbers') {
+    group = "Workshop"
+    description = "Erstellt Datei mit Zahlen von 1 bis 10"
+
+    doLast {
+        def file = file("$layout.buildDirectory/numbers.txt")
+
+        file.parentFile.mkdirs()
+
+        def numbers = (1..10).join("\n")
+
+        file.text = numbers
+
+        println "numbers.txt erstellt."
+    }
+}
+
+// Verarbeitet Zahlen → nur gerade
+tasks.register('processNumbers') {
+    group = "Workshop"
+    description = "Filtert gerade Zahlen aus Datei"
+    dependsOn 'generateNumbers'
+
+    doLast {
+        def inputFile  = file("$layout.buildDirectory/numbers.txt")
+
+        def outputFile = file("$layout.buildDirectory/evenNumbers.txt")
+
+        def numbers = inputFile.readLines()
+
+        def evenNumbers = numbers
+                .collect { it as Integer }
+                .findAll { it % 2 == 0 }
+
+        outputFile.text = evenNumbers.join("\n")
+
+        println "Gerade Zahlen gespeichert in evenNumbers.txt"
+    }
+}

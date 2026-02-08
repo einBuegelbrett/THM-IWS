@@ -84,54 +84,7 @@ tasks.register('deleteOutputTask', Delete) {
 }
 
 // ==============================
-// Task 4: Custom DefaultTask
-// ==============================
-//
-// Führe `./gradlew customHelloTask` aus
-// Fragen:
-// - Wie unterscheidet sich diese Task von Copy/Delete?
-class HelloTask extends DefaultTask {
-    @TaskAction
-    static void hello() {
-        println("hello from HelloTask")
-    }
-}
-
-tasks.register("customHelloTask", HelloTask) {
-    group = "Custom tasks"
-    description = "Eine liebevolle Begrüßungs-Task"
-}
-
-// ==============================
-// Task 5: CreateAFileTask
-// ==============================
-//
-// Fragen:
-// - Welche Datei wird erzeugt?
-// - Wo wird sie erstellt?
-// - Welche Annotation markiert Eingabewerte?
-// - Welche markiert die Ausgabedatei?
-// - Warum sind diese Annotationen wichtig?
-// - Wird die Task erneut ausgeführt oder übersprungen, wenn der Text sich nicht ändert?
-abstract class CreateAFileTask extends DefaultTask {
-    @Input
-    abstract Property<String> getFileText()
-
-    @Input
-    final String fileName = "myfile.txt"
-
-    @OutputFile
-    final File myFile = new File(fileName)
-
-    @TaskAction
-    void action() {
-        myFile.createNewFile()
-        myFile.text = fileText.get()
-    }
-}
-
-// ==============================
-// Task 6: introTask
+// Task 4: introTask
 // ==============================
 //
 // Führe `gradle -q intro` aus.
@@ -145,60 +98,18 @@ abstract class CreateAFileTask extends DefaultTask {
 // Was ändert sich jetzt?
 tasks.register('introTask') {
     doLast {
-        println 'Hello world!'
+        println 'Dancefloor initialized!'
     }
 }
 tasks.register('intro') {
     // dependsOn tasks.introTask
     doLast {
-        println "I'm Gradle"
+        println "✨ Ah ah ah ah Stayin’ alive ✨"
     }
 }
 
 // ==============================
-// Task 7: taskX / taskY Reihenfolge
-// ==============================
-//
-// Frage:
-// Funktioniert taskX, obwohl taskY erst danach definiert wird?
-// Beobachtungsaufträge:
-// - Führe `./gradlew taskX` aus.
-// - Welche Ausgabe erscheint zuerst?
-// - Was sagt das über die Auswertungsphase von Gradle aus?
-tasks.register('taskX') {
-    dependsOn 'taskY'
-    doLast {
-        println 'taskX'
-    }
-}
-tasks.register('taskY') {
-    doLast {
-        println 'taskY'
-    }
-}
-
-
-// ==============================
-// Task 8: helloWithAssemble
-// ==============================
-//
-// Führe `./gradlew helloWithAssemble` aus.
-// Fragen:
-// - Welche Task wird vor helloWithAssemble ausgeführt?
-// - Was macht die assemble-Task?
-// - Warum könnte es sinnvoll sein, hello davon abhängig zu machen?
-// - Welche Artefakte existieren danach im build-Ordner?
-tasks.register('helloWithAssemble') {
-    group = "Custom"
-    description = "A lovely greeting task."
-    doLast {
-        println("Hello world!")
-    }
-    dependsOn(tasks.assemble)
-}
-
-// ==============================
-// Task 9: helloLifecycle
+// Task 5: helloLifecycle
 // ==============================
 //
 // Führe `./gradlew helloLifecycle` aus.
@@ -210,21 +121,21 @@ tasks.register('helloWithAssemble') {
 // - Wie verwaltet Gradle die Aktionsliste intern?
 tasks.register('helloLifecycle') {
     doLast {
-        println 'Hello Earth'
+        println 'Hello ABBA'
     }
 }
 tasks.named('helloLifecycle') {
     doFirst {
-        println 'Hello Venus'
+        println 'Hello Boney M'
     }
 }
 tasks.named('helloLifecycle') {
     doLast {
-        println 'Hello Mars'
+        println 'Hello Giorgio Moroder'
     }
 }
 tasks.named('helloLifecycle') {
     doLast {
-        println 'Hello Jupiter'
+        println 'Hello Bee Gees'
     }
 }

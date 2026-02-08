@@ -38,7 +38,14 @@ repositories {
  * Projekt: <Projektname>
  */
 tasks.register('greetWorkshop') {
+    group = "Workshop"
+    description = "Gibt eine Begrüßung für den Workshop aus"
 
+    doLast {
+        println "Willkommen zum Groovy-Gradle Workshop!"
+        println "Projekt: $project.name"
+        println "Version: $project.version"
+    }
 }
 
 /**
@@ -56,5 +63,21 @@ tasks.register('greetWorkshop') {
  * Task soll als UP-TO-DATE erkannt werden, wenn sich nichts ändert
  */
 tasks.register('createInfoFile') {
+    group = "Workshop"
+    description = "Erstellt eine Info-Datei mit Projektmetadaten"
 
+    doLast {
+        def outputFile = file("$layout.buildDirectory/info.txt")
+
+        outputFile.parentFile.mkdirs()
+
+        def content = """
+            Projekt: $project.name
+            Version: $project.version
+            Datum: ${new Date()}
+            """
+
+        outputFile.text = content
+        println "Datei erstellt: $outputFile"
+    }
 }
