@@ -1,3 +1,5 @@
+package block_5._13_FehlerFinden
+
 plugins {
     id 'groovy'
     id 'application'
