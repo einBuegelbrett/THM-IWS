@@ -20,13 +20,13 @@ import groovy.transform.CompileStatic
  * 3. Implementiere die 'process'-Methode:
  * - Sicherer Umgang mit null-Werten (Liste & Einträge).
  * - Filter: Nur Funksprüche, die mit "STAGE" beginnen.
- * - Transformation: Nutze die übergebene Closure für die Nachricht. Die erste Ausgabe soll so aussehen: "STAGE [1]: MIC CHECK 1-2". 
+ * - Transformation: Nutze die übergebene (!!!) Closure für die Nachricht. Die erste Ausgabe soll so aussehen: "STAGE [1]: MIC CHECK 1-2". 
  * - Rückgabe: Eine Liste von 'RadioLog'-Objekten.
  * 4. Nutze in der 'main' GStrings für die finale Formatierung.
  */
 
 static void main(String[] args) {
-    println "--- AUFGABE 3: Festival-Pipeline mit AST & Closures ---"
+    println "--- Aufgabe 3: Festival-Pipeline mit AST & Closures ---"
     println()
 
     // Simulierter Funkverkehr
@@ -45,9 +45,15 @@ static void main(String[] args) {
             "STAGE: Pyrotechnik bereit"
     ]
 
-    // TODO: Rufe PipelineProcessor.process auf.
-    // Übergib die Liste und eine Closure, die den Text transformiert (wie der Counter funktioniert ist Ihnen überlassen).
-    def result = [] // Implementiere den Aufruf hier
+    def radioCounter = 1
+    
+    /**
+     * Aufruf der Pipeline:
+     * Wir filtern nur "STAGE"-Sprüche und transformieren sie in Großbuchstaben mit Nummerierung.
+     */
+    def result = PipelineProcessor.process(messages) { String msg ->
+        "STAGE [${radioCounter++}]: ${msg.toUpperCase()}"
+    }
 
     println "Verarbeitete Funksprüche:"
     result?.each { logEntry ->
@@ -56,24 +62,28 @@ static void main(String[] args) {
 }
 
 /**
- * 1. TODO: Erstelle die Klasse RadioLog. 
+ * TODO: Erstelle die Klasse RadioLog. 
  * Nutze hier eine AST-Transformation für automatische 
  * Konstruktoren und eine saubere toString()-Ausgabe 
+ * Die Klasse braucht nur zwei Strings (type und content), mehr nicht. 
  */
 
 
 /**
- * 2. TODO: Erzwinge hier statische Typprüfung (Performance).
+ * TODO: Erzwinge hier statische Typprüfung (Performance).
  */
 class PipelineProcessor {
 
     /**
-     * 3. TODO: Implementiere die Datenpipeline.
+     * TODO: Implementiere die Datenpipeline.
      * @param lines Die Liste der Rohdaten
      * @param transformLogic Eine Closure, die einen String transformiert
      */
     static List<RadioLog> process(List<String> lines, Closure<String> transformLogic) {
-        // TODO: Implementiere die Logik. Achte auf null Einträge und nutze Closures für die verwendeten Methoden. 
+        // TODO: Implementiere die Logik. 
+        // Achte auf null Einträge und nutze Closures für die verwendeten Methoden.
+        // Gebe bei keinen Lines eine leere Liste zurück. 
+        // Siehe oben die Anforderungen (Tipp: Nutze Closures in .findAll und .collect)
         
         return [] // Platzhalter
     }

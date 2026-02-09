@@ -42,9 +42,8 @@ static void main(String[] args) {
     }
 
     println "Verarbeitete Funksprüche:"
-    result.each { entry ->
-        // Dank @Canonical wird hier eine saubere toString-Repräsentation ausgegeben
-        println entry
+    result.each { logEntry ->
+        println logEntry
     }
 }
 

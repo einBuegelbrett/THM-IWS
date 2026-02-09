@@ -7,13 +7,12 @@ package block_3
  */
 static void main(String[] args) {
 
-    println "--- Aufgabe 1: Festival Check-In ---"
+    println "--- Musterlösung - Aufgabe 1: Festival Check-In ---"
     println()
 
-    // Dank Groovy können wir Map-Style Konstruktoren nutzen!
     def groover1 = new Groover(
             stageName: "Jimi",
-            instrument: "Stratocaster",
+            instrument: "E-gitarre",
             vibeLevel: 90,
             setlist: ["Voodoo Child", "Hey Joe"]
     )

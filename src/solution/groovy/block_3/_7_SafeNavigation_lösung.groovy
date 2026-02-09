@@ -1,16 +1,8 @@
 package block_3
 
-/**
- * Aufgabe: Ticket-Validierung & VIP-Check
- * * Anforderungen:
- * 1. Implementiere `getNamesOfVips`, die eine Liste von Usern filtert.
- * 2. Nutze den Spread-Operator, um die Namen aller User in einer Liste zu erhalten.
- * 3. Nutze eine Range (1..100), um zu prüfen, ob eine Ticket-Nummer im gültigen Bereich liegt.
- * 4. Nutze DSL-Style (keine Klammern bei Methodenaufrufen), wo es sinnvoll ist.
- */
 
 static void main(String[] args) {
-    println "--- Aufgabe: Ranges, Spread & DSL ---"
+    println "--- Musterlösung-Aufgabe 2: Ranges, Spread & DSL ---"
 
     def users = [
         new EventUser(name: "Joe", ticketId: 50),

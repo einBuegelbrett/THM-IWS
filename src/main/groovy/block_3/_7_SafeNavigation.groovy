@@ -21,8 +21,12 @@ static void main(String[] args) {
         null 
     ]
 
-    // TODO: rufe beide Methoden auf und geben sie mit passenden Überschriften aus. Achte auf den DSL-Style. 
+    // DSL-Style: Klammern weglassen beim Aufruf
+    println "Alle Namen im System:"
+    println EventUtils.allNames(users) 
 
+    println "\nVIP-Status Check (Tickets 1-50):"
+    println EventUtils.getVipStatusList(users)
 }
 
 class EventUtils {
@@ -30,6 +34,7 @@ class EventUtils {
     /**
      * Extrahiert alle Namen aus der User-Liste.
      * Nutze Safe Navigation und den Spread-Operator.
+     * PS: Es gibt mehrere Möglichkeiten, das zu lösen. 
      */
     static List<String> allNames(List<EventUser> users) {
         // Die Methode hat idealerweise einen Inhalt von genau einer Zeile. 
@@ -41,11 +46,12 @@ class EventUtils {
     /**
      * Prüft das Ticket des ersten Users in der Liste.
      */
-    static String getVipStatus(List<EventUser> users) {
+    static List<String> getVipStatusList(List<EventUser> users) {
         // TODO: Entnehme alle User aus der vorherigen Methode  
         // TODO: Erstelle eine Range von 1 bis 50, prüfe das die Userliste nicht null ist. 
         // TODO: Prüfe mit dem 'in' Operator in einer For-Schleife, ob die ticketId in der Range liegt
         //       Nutze dafür den Elvis-Operator, Safe Navigation und GStrings.  
+        //       Gebe dann aus, wenn eine Person VIP oder nicht ist. 
         
         return "Noch nicht implementiert"
     }

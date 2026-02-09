@@ -8,16 +8,17 @@ package block_3
  * 1. Implementiere 'vibeStatus': Nutze GStrings für die Ausgabe.
  * 2. Implementiere 'isReadyToParty': Nutze den Implizit Return (kein 'return' nötig).
  * 3. Implementiere 'festivalCard': Kombiniere Methodenaufrufe innerhalb eines GStrings.
+ *
+ * Für die groovierenden unter euch: löst jede Aufgabe mit nur einer einzigen Zeile und wenn möglich nur mit einem String. 
  */
 static void main(String[] args) {
 
     println "--- Aufgabe 1: Festival Check-In ---"
     println()
 
-    // Dank Groovy können wir Map-Style Konstruktoren nutzen!
     def groover1 = new Groover(
             stageName: "Jimi",
-            instrument: "Stratocaster",
+            instrument: "E-gitarre",
             vibeLevel: 90,
             setlist: ["Voodoo Child", "Hey Joe"]
     )
@@ -53,42 +54,43 @@ class Groover {
     List<String> setlist = []
 
     /**
-     * Gibt den Status zurück.
+     * Gebe den Namen inkl. das Instrument zurück. Achte dabei auf GStrings.  
      * z.B. "Jimi rockt die Stratocaster"
      */
     String vibeStatus() {
-        // TODO: Nutze GStrings (Anführungszeichen wichtig!)
         "" 
     }
 
     /**
-     * Prüft, ob das vibeLevel hoch genug für die Party ist (>= 80)
+     * Prüfe, ob das vibeLevel hoch genug für die Party ist (>= 80)
+     * Implementiere den Check (Implizit Return nutzen!)
      */
     boolean isReadyToParty() {
-        // TODO: Implementiere den Check (Implizit Return nutzen!)
         false 
     }
 
     /**
-     * Gibt eine Beschreibung zurück.
+     * Gebe den vibeStatus mit dem Vibe-Level zurück und benutze GStrings. 
      * z.B. "Jimi rockt die Stratocaster (Vibe: 90%)"
      */
     String festivalCard() {
-        // TODO: Nutze vibeStatus() innerhalb dieses GStrings
         ""
     }
 
 
     /**
-     * Erstelle eine Ausgabe für den ersten Song und die Anzahl der Songs 
+     * Erstelle eine Rückgabe für den ersten Song
      * z.B. "Blue Grooved" als erster Song 
      */
     String getOpeningSong() {
         ""
     }
 
+    /**
+     * Gebe die Anzahl aller Songs zurück. 
+     * z.B. "Blue Grooved" als erster Song 
+     */
     int countSongs() {
-            // TODO: Gib die Anzahl der Songs zurück
             ""
     }
 }
