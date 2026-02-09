@@ -1,55 +1,89 @@
 package block_3
 
 import spock.lang.Specification
-import spock.lang.Subject
 
-class EventUtilsSpec extends Specification {
+class EventUtilsSpecification extends Specification {
 
-    def "allNames sollte alle Namen extrahieren und null-User ignorieren"() {
-        given: "Eine Liste mit Usern und einem null-Eintrag"
+    def "allNames gibt alle User-Namen zurück"() {
+        given:
         def users = [
-            new EventUser(name: "Alice", ticketId: 10),
-            null,
-            new EventUser(name: "Charlie", ticketId: 20)
+                new EventUser(name: "Joe", ticketId: 10),
+                new EventUser(name: "Bob", ticketId: 20),
+                new EventUser(name: "Jacqueline", ticketId: 30)
         ]
 
-        when: "allNames aufgerufen wird"
-        def names = EventUtils.allNames(users)
-
-        then: "Sind nur die validen Namen in der Liste"
-        names == ["Alice", "Charlie"]
-        names.size() == 2
+        expect:
+        EventUtils.allNames(users) == ["Joe", "Bob", "Jacqueline"]
     }
 
-    def "allNames sollte eine leere Liste bei null-Eingabe zurückgeben"() {
+    def "allNames ignoriert null-User in der Liste"() {
+        given:
+        def users = [
+                new EventUser(name: "Joe", ticketId: 10),
+                null,
+                new EventUser(name: "Bob", ticketId: 20)
+        ]
+
+        expect:
+        EventUtils.allNames(users) == ["Joe", "Bob"]
+    }
+
+    def "allNames gibt leere Liste bei null zurück"() {
         expect:
         EventUtils.allNames(null) == []
     }
 
-    def"getVipStatusList sollte VIPs korrekt identifizieren (Range 1-50)"() {
-        given: "User mit unterschiedlichen Ticket-IDs"
+    def "getVipStatusList erkennt VIPs im Range 1..50"() {
+        given:
         def users = [
-            new EventUser(name: "Alice", ticketId: 50),  // Grenze VIP
-            new EventUser(name: "Bob", ticketId: 51),    // Knapp kein VIP
-            new EventUser(name: "Charlie", ticketId: 1), // VIP
-            null                                         // Sollte ignoriert/sicher behandelt werden
+                new EventUser(name: "Joe", ticketId: 50),
+                new EventUser(name: "Jacqueline", ticketId: 10)
         ]
 
         when:
-        def results = EventUtils.getVipStatusList(users)
+        def result = EventUtils.getVipStatusList(users)
 
-        then: "Stimmen die Status-Meldungen"
-        results.contains("Alice ist VIP")
-        results.contains("Bob ist kein VIP")
-        results.contains("Charlie ist VIP")
-        results.size() == 3 // null-Eintrag erzeugt keinen String in der Liste (laut deiner Logik)
+        then:
+        result == [
+                "Joe ist VIP",
+                "Jacqueline ist VIP"
+        ]
     }
 
-    def "getVipStatusList sollte 'Gast' verwenden, wenn der Name null ist"() {
-        given: "Ein User ohne Namen aber mit VIP Ticket"
-        def users = [new EventUser(name: null, ticketId: 25)]
+    def "getVipStatusList erkennt Nicht-VIPs korrekt"() {
+        given:
+        def users = [
+                new EventUser(name: "Bob", ticketId: 150)
+        ]
 
+        when:
+        def result = EventUtils.getVipStatusList(users)
+
+        then:
+        result == ["Bob ist kein VIP"]
+    }
+
+    def "getVipStatusList verarbeitet gemischte Liste inkl null"() {
+        given:
+        def users = [
+                new EventUser(name: "Joe", ticketId: 50),
+                new EventUser(name: "Bob", ticketId: 150),
+                null
+        ]
+
+        when:
+        def result = EventUtils.getVipStatusList(users)
+
+        then:
+        result == [
+                "Joe ist VIP",
+                "Bob ist kein VIP",
+                "Gast ist kein VIP"
+        ]
+    }
+
+    def "getVipStatusList gibt leere Liste bei null zurück"() {
         expect:
-        EventUtils.getVipStatusList(users) == ["Gast ist VIP"]
+        EventUtils.getVipStatusList(null) == []
     }
 }

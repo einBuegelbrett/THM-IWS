@@ -4,37 +4,78 @@ import spock.lang.Specification
 
 class KlassenSpecification extends Specification {
 
-    def "fullName gibt Vor- und Nachnamen zurück"() {
+    def "vibeStatus gibt korrekten String zurück"() {
         given:
-        def person = new Person(
-                firstName: "Max",
-                lastName: "Mustermann",
-                age: 25
+        def groover = new Groover(
+                stageName: "Jimi",
+                instrument: "Stratocaster",
+                vibeLevel: 90
         )
 
         expect:
-        person.fullName() == "Max Mustermann"
+        groover.vibeStatus() == "Jimi rockt die Stratocaster"
     }
 
-    def "isAdult ist true bei Alter >= 18"() {
+    def "isReadyToParty ist true bei VibeLevel >= 80"() {
         expect:
-        new Person(firstName: "Anna", lastName: "Schmidt", age: 18).isAdult()
+        new Groover(stageName: "Jimi", instrument: "Gitarre", vibeLevel: 80)
+                .isReadyToParty()
     }
 
-    def "isAdult ist false bei Alter < 18"() {
+    def "isReadyToParty ist false bei VibeLevel < 80"() {
         expect:
-        !new Person(firstName: "Tom", lastName: "Klein", age: 16).isAdult()
+        !new Groover(stageName: "Bob", instrument: "Luftgitarre", vibeLevel: 50)
+                .isReadyToParty()
     }
 
-    def "description gibt formatierte Beschreibung zurück"() {
+    def "countSongs gibt Anzahl der Songs zurück"() {
         given:
-        def person = new Person(
-                firstName: "Lisa",
-                lastName: "Meyer",
-                age: 30
+        def groover = new Groover(
+                stageName: "Jimi",
+                instrument: "Gitarre",
+                vibeLevel: 90,
+                setlist: ["Voodoo Child", "Hey Joe"]
         )
 
         expect:
-        person.description() == "Lisa Meyer (30 Jahre)"
+        groover.countSongs() == 2
+    }
+
+    def "getOpeningSong gibt ersten Song zurück"() {
+        given:
+        def groover = new Groover(
+                stageName: "Jimi",
+                instrument: "Gitarre",
+                vibeLevel: 90,
+                setlist: ["Voodoo Child", "Hey Joe"]
+        )
+
+        expect:
+        groover.getOpeningSong() == "Voodoo Child"
+    }
+
+    def "getOpeningSong gibt Default zurück wenn Setlist leer"() {
+        given:
+        def groover = new Groover(
+                stageName: "Bob",
+                instrument: "Luftgitarre",
+                vibeLevel: 40,
+                setlist: []
+        )
+
+        expect:
+        groover.getOpeningSong() == "Noch keine Songs"
+    }
+
+    def "festivalCard kombiniert Status und VibeLevel"() {
+        given:
+        def groover = new Groover(
+                stageName: "Jimi",
+                instrument: "Stratocaster",
+                vibeLevel: 90
+        )
+
+        expect:
+        groover.festivalCard() == "Jimi rockt die Stratocaster (Vibe: 90%)"
     }
 }
