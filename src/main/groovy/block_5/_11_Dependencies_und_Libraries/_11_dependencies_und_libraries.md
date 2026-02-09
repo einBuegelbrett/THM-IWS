@@ -8,33 +8,26 @@ Let’s get your code into the groove!
 ---
 
 ## Teil 1: Neue Library erstellen
-Erstellt ein neues Gradle-Projekt mit dem Namen:
+Erstelle ein neues Verzeichnis mit dem Namen:
 
 ```
 groove-library
 ```
+und führt das aus:
 
-Dieses Projekt stellt Ihre **selbst entwickelte Library** dar.
+```bash
+gradle init --type groovy-application --dsl groovy
 
-### build.gradle (Grundstruktur)
+Enter target Java version (min: 7, default: 21): 21
 
-```gradle
-plugins {
-    id 'groovy'
-    id 'maven-publish'
-}
+Project name (default: groove-library): groove-library
 
-group = 'de.thm'
-version = '1.0-SNAPSHOT'
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    implementation 'org.apache.groovy:groovy:5.0.0'
-}
+Select application structure:
+  1: Single application project
+  2: Application and library project
+Enter selection (default: Single application project) [1..2] 1
 ```
+Dieses Projekt stellt Ihre **selbst entwickelte Library** dar.
 
 ---
 

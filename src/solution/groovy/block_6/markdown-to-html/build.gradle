@@ -40,7 +40,7 @@ tasks.register('markdownToHtml') {
                 .findAll { it.name.endsWith(".md") }
 
         if (!files) {
-            println "⚠No Markdown files found."
+            println "No Markdown files found."
             return
         }
 
