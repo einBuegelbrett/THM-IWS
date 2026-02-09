@@ -8,12 +8,12 @@ class KlassenSpecification extends Specification {
         given:
         def groover = new Groover(
                 stageName: "Jimi",
-                instrument: "Stratocaster",
+                instrument: "E-Gitarre",
                 vibeLevel: 90
         )
 
         expect:
-        groover.vibeStatus() == "Jimi rockt die Stratocaster"
+        groover.vibeStatus() == "Jimi rockt die E-Gitarre"
     }
 
     def "isReadyToParty ist true bei VibeLevel >= 80"() {
