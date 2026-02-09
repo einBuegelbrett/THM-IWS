@@ -50,7 +50,7 @@ class Funktion {
      * greetInLanguage("Luis", "es") -> "Hola Luis, siente el groove!"
      * greetInLanguage("Luis", "fr") -> "Bonjour Luis, sens le groove!"
      */
-    static String greetInLanguage(String name = "Groover", String language = "en") {
+    static String greetInLanguage() {
 
     }
 }
