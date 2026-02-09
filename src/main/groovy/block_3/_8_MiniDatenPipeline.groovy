@@ -67,6 +67,9 @@ static void main(String[] args) {
  * Konstruktoren und eine saubere toString()-Ausgabe 
  * Die Klasse braucht nur zwei Strings (type und content), mehr nicht. 
  */
+class RadioLog {
+
+}
 
 
 /**
