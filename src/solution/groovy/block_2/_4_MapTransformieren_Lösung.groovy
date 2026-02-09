@@ -43,7 +43,9 @@ class MapTransformer {
      * }
      */
     static Map<String, BigDecimal> expensiveProducts(Map<String, BigDecimal> prices) {
-        
+        prices.findAll { key, value ->
+            value > 1.0
+        }
     }
 
     /**
@@ -58,7 +60,9 @@ class MapTransformer {
      * }
      */
     static Map<String, BigDecimal> increasePrices(Map<String, BigDecimal> prices) {
-        
+        prices.collectEntries { key, value ->
+            [(key): (value * 1.1)]
+        }
     }
 
     /**
@@ -70,7 +74,9 @@ class MapTransformer {
      * }
      */
     static Map<String, BigDecimal> uppercaseKeys(Map<String, BigDecimal> prices) {
-        
+        prices.collectEntries { key, value ->
+            [(key.toUpperCase()): value]
+        }
     }
 
     /**
@@ -91,6 +97,11 @@ class MapTransformer {
      * }
      */
     static Map<String, BigDecimal> priceDeviation(Map<String, BigDecimal> prices) {
-        
+        def average = prices.values().sum() / prices.size()
+
+        prices
+            .collectEntries { key, value ->
+                [(key): (value - average)]
+            }
     }
 }

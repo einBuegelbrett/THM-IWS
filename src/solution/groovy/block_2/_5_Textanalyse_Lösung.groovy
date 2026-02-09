@@ -37,7 +37,7 @@ class TextAnalysis {
      * return count;
      */
     static int wordCount(String text) {
-        
+        text.split(" ").size()
     }
 
     /**
@@ -52,7 +52,7 @@ class TextAnalysis {
      * return count;
      */
     static int countWord(String text, String search) {
-        
+        text.split(" ").count { it == search }
     }
 
     /**
@@ -67,6 +67,6 @@ class TextAnalysis {
      * return result;
      */
     static List<String> wordsLongerThan(String text, int minLength) {
-        
+        text.split(" ").findAll { it.length() > minLength }
     }
 }

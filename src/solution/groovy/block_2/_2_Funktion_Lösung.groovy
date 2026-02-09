@@ -3,8 +3,9 @@ package block_2
 // https://groovy-lang.org/objectorientation.html#_default_arguments
 
 /**
- * Aufgabe 2:
+ * Aufgabe 4:
  * Schreibe Funktionen mit Default-Parametern
+ * Thema: Groovy Vibes
  */
 static void main(String[] args) {
 
@@ -30,8 +31,8 @@ class Funktion {
      * welcome() -> "Welcome to the groove, Groover!"
      * welcome("Clara") -> "Welcome to the groove, Clara!"
      */
-    static String welcome() {
-        
+    static String welcome(String name = "Groover") {
+        "Welcome to the groove, ${name}!"
     }
 
     /**
@@ -50,7 +51,16 @@ class Funktion {
      * greetInLanguage("Luis", "es") -> "Hola Luis, siente el groove!"
      * greetInLanguage("Luis", "fr") -> "Bonjour Luis, sentir le groove!"
      */
-    static String greetInLanguage() {
-        
+    static String greetInLanguage(String name = "Groover", String language = "en") {
+        switch (language) {
+            case "de":
+                return "Hallo ${name}, fühl den Groove!"
+            case "es":
+                return "Hola ${name}, siente el groove!"
+            case "fr":
+                return "Bonjour ${name}, sentir le groove!"
+            default:
+                return "Hello ${name}, feel the groove!"
+        }
     }
 }
