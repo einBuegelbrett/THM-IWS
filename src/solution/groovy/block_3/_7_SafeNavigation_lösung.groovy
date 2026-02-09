@@ -20,42 +20,29 @@ static void main(String[] args) {
 }
 
 class EventUtils {
-    // 1. Nutze Safe Navigation und den Spread-Operator (*.)
-    // 2. Erstelle eine Range von 1 bis 50 für VIPs
+    // Nutzt den Spread-Operator (*.), der null-safe arbeitet
+    // Ersetzt null-Namen durch "kein Name"
+    // Liefert eine leere Liste zurück, falls users null ist
     static List<String> allNames(List<EventUser> users) {
-        // TIPP: users?.name gibt dir direkt eine Liste der Namen, 
-        // aber Vorsicht mit den Null-Einträgen in der Liste!
-        users?.findAll { it != null }*.name ?: []
+        users*.name.collect { it ?: "kein Name" } ?: []
     }
 
 static List<String> getVipStatusList(List<EventUser> users) {
-        List<String> results = []
-        
-        // 1. SPREAD-OPERATOR & SAFE NAVIGATION
-        // Wir holen uns alle Namen vorab als Liste (ignoriert null-User dank ?. und *.)
-        def allNames = allNames(users)
-        
-        // 2. RANGE & ELVIS-OPERATOR
-        def vipRange = 1..50
-        // Sicherstellen, dass wir eine Liste haben, selbst wenn users null ist
-        def safeUsers = users ?: [] 
+    // VIP-Ticketnummern von 1 bis 50
+    def vipRange = 1..50
 
-        // 3. FOR-SCHLEIFE MIT GSTRINGS
-        for (user in safeUsers) {
-            // SAFE NAVIGATION beim Zugriff auf ticketId
-            def id = user?.ticketId ?: 0 // Elvis: Falls null (z.B. bei null-User), nimm 0
-            
-            // RANGE-CHECK mit 'in'
-            if (id in vipRange) {
-                // GSTRING mit Safe Navigation für den Namen
-                results.add("${user?.name ?: 'Gast'} ist VIP")
-            } else if (user != null) {
-                results.add("${user.name} ist kein VIP")
-            }
-        }
-        
-        return results
+    // Falls users null ist, mit leerer Liste arbeiten
+    (users ?: []).collect { u ->
+        // Name sicher lesen, null → "Gast"
+        def name = u?.name ?: "Gast"
+        // Ticket-ID sicher lesen, null → 0 (kein VIP)
+        def id   = u?.ticketId ?: 0
+
+        // VIP-Check mit Range und GString
+        "${name} ist " + ((id in vipRange) ? "ein VIP" : "kein VIP")
     }
+}
+
 }
 
 class EventUser {

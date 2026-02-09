@@ -33,26 +33,22 @@ class EventUtils {
 
     /**
      * Extrahiert alle Namen aus der User-Liste.
-     * Nutze Safe Navigation und den Spread-Operator.
+     * Nutze den Spread-Operator für alle Namen inkl. Null 
+     * Nutze .collect, um mit dem Elvis-Operator "kein Namen" zurückzugeben
+     * Bei keinem User, leere Liste zurückgeben. 
      * PS: Es gibt mehrere Möglichkeiten, das zu lösen. 
      */
-    static List<String> allNames(List<EventUser> users) {
-        // Die Methode hat idealerweise einen Inhalt von genau einer Zeile. 
-        // TODO: Gib eine leere Liste zurück, falls 'users' null ist (Elvis Operator)
-        
+    static List<String> allNames(List<EventUser> users) {       
         [] // Platzhalter
     }
 
     /**
-     * Prüft das Ticket des ersten Users in der Liste.
+     * Erstelle eine Range von 1 bis 50. Wenn es keinen User gibt -> leere Liste
+     * Nutze .collect um den Namen (auch bei Null!!) sicher zu lesen.
+     * Prüfe ob die Ticket_ID gültig in der Range ist! (bei Null -> 0)
+     * Nutze GStrings und Elvis für VIP und nicht VIP-user. 
      */
     static List<String> getVipStatusList(List<EventUser> users) {
-        // TODO: Entnehme alle User aus der vorherigen Methode  
-        // TODO: Erstelle eine Range von 1 bis 50, prüfe das die Userliste nicht null ist. 
-        // TODO: Prüfe mit dem 'in' Operator in einer For-Schleife, ob die ticketId in der Range liegt
-        //       Nutze dafür den Elvis-Operator, Safe Navigation und GStrings.  
-        //       Gebe dann aus, wenn eine Person VIP oder nicht ist. 
-        
         return "Noch nicht implementiert"
     }
 }
