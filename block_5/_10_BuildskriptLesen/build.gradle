@@ -1,11 +1,10 @@
-package block_5._10_BuildskriptLesen
-
 // https://docs.gradle.org/current/userguide/writing_tasks_intermediate.html
 
 /**
  * Aufgabe 10
  * Ihr werdet nun von oben nach unten durcharbeiten und lernen, was alles mit Tasks in Gradle möglich ist, was die Vorteile sind.
  * Es werden Fragen gestellt, gebe deine Antworten nebendran an. Führe die Tasks auch aus.
+ * WICHTIG: Alle Dateien, die erstellt oder gelöscht werden, sind im Ordner „_10_BuildskriptLesen” zu finden.
  * Als erste Frage um die Tanzbeine zu wärmen:
  * - Wo kannst du hier ELemente von Groovy (Closures, GStrings, Methoden ohne Klammern, ...) erkennen?
  */
@@ -89,20 +88,19 @@ tasks.register('deleteOutputTask', Delete) {
 //
 // Führe `gradle -q intro` aus.
 // Fragen:
-// - Wird die introTask-Task automatisch mit ausgeführt?
+// - Wird die introTask-Task mit ausgeführt?
 // - Warum (nicht)?
+//
+// Ergänze anschließend: dependsOn tasks.introTask
 // - Was bewirkt `dependsOn`?
 // - In welcher Reihenfolge werden die Tasks ausgeführt?
-//
-// Ergänze anschließend: dependsOn tasks.introTask /
-// Was ändert sich jetzt?
 tasks.register('introTask') {
     doLast {
         println 'Dancefloor initialized!'
     }
 }
 tasks.register('intro') {
-    // dependsOn tasks.introTask
+    //dependsOn tasks.introTask
     doLast {
         println "🎶 Ah ah ah ah Stayin’ alive, stayin’ alive! 🎶"
     }
@@ -120,9 +118,7 @@ tasks.register('intro') {
 // - Was passiert, wenn du ein weiteres doFirst hinzufügst?
 // - Wie verwaltet Gradle die Aktionsliste intern?
 tasks.register('helloLifecycle') {
-    doLast {
-        println 'Hello ABBA'
-    }
+    println 'Hello ABBA'
 }
 tasks.named('helloLifecycle') {
     doFirst {

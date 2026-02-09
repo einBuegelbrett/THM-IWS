@@ -28,9 +28,9 @@ class PipelineProcessorSpecification extends Specification {
         def result = PipelineProcessor.process(input) { it }
 
         then:
-        result[0] instanceof RadioLog
-                result[0].type == "STAGE"
-        result[0].content == "Test"
+        result[0] instanceof RadioLog;
+        result[0].type == "STAGE";
+        result[0].content == "Test";
     }
 
     def "Transformation-Closure wird angewendet"() {
