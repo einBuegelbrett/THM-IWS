@@ -1,3 +1,5 @@
 rootProject.name = 'THM-IWS'
 
 include 'block_5:_10_BuildskriptLesen'
+include 'block_5:_12_EigeneTasks'
+include 'block_5:_13_FehlerFinden'

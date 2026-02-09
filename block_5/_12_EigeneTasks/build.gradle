@@ -1,5 +1,3 @@
-package block_5._12_EigeneTasks
-
 plugins {
     id 'groovy'
 }
@@ -18,11 +16,6 @@ repositories {
  * Testet eure Tasks mit:
  * ./gradlew greetWorkshop
  * ./gradlew createInfoFile
- * ./gradlew processNumbers
- *
- * Optional:
- * ./gradlew tasks
- * ./gradlew help --task <taskname>
  */
 
 /**
@@ -45,7 +38,7 @@ tasks.register('greetWorkshop') {
  * Task 2 – Mittel: Dateierstellung
  * Erstellt einen Task: createInfoFile
  * Anforderungen:
- *      - Erstellt eine Datei block_bonus.gradle_aufgaben.build/info.txt
+ *      - Erstellt eine Datei build/info.txt
  *      - Schreibt folgende Infos hinein:
  *          - Projektname
  *          - Version

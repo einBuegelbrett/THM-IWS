@@ -75,12 +75,11 @@ Damit wird eure Library in euer lokales Maven-Repository „gedroppt“ 🎶
 ---
 
 ## Teil 5: Library verwenden
-Ihr fügt die Abhängigkeit in der allgemeinen build.gradle hinzu und erstellt:
+Ihr fügt die Abhängigkeit in der allgemeinen build.gradle hinzu und benutzt die Library hier:
 ```
-src/main/groovy/block_5/_11_Dependencies_undLibraries/App.groovy
+src/main/groovy/block_5/_11_Dependencies_undLibraries/GroovyLibrary.groovy
 ```
 
-und benutzt die Library.
 Beim Ausführen sollte euer Programm nun grooven 🕺
 
 ---
