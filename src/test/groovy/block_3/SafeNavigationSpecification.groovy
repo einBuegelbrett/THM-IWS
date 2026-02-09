@@ -16,7 +16,7 @@ class EventUtilsSpecification extends Specification {
         EventUtils.allNames(users) == ["Joe", "Bob", "Jacqueline"]
     }
 
-    def "allNames ignoriert null-User in der Liste"() {
+    def "allNames ersetzt null-User durch 'kein Name'"() {
         given:
         def users = [
                 new EventUser(name: "Joe", ticketId: 10),
@@ -25,7 +25,7 @@ class EventUtilsSpecification extends Specification {
         ]
 
         expect:
-        EventUtils.allNames(users) == ["Joe", "Bob"]
+        EventUtils.allNames(users) == ["Joe", "kein Name", "Bob"]
     }
 
     def "allNames gibt leere Liste bei null zurück"() {
@@ -45,8 +45,8 @@ class EventUtilsSpecification extends Specification {
 
         then:
         result == [
-                "Joe ist VIP",
-                "Jacqueline ist VIP"
+                "Joe ist ein VIP",
+                "Jacqueline ist ein VIP"
         ]
     }
 
@@ -76,7 +76,7 @@ class EventUtilsSpecification extends Specification {
 
         then:
         result == [
-                "Joe ist VIP",
+                "Joe ist ein VIP",
                 "Bob ist kein VIP",
                 "Gast ist kein VIP"
         ]
