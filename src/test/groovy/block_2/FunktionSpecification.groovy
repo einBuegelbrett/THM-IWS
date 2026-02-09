@@ -40,6 +40,6 @@ class FunktionSpecification extends Specification {
 
     def "greetInLanguage(name, fr) gibt französische Groove-Begrüßung zurück"() {
         expect:
-        Funktion.greetInLanguage("Luis", "fr") == "Bonjour Luis, sentir le groove!"
+        Funktion.greetInLanguage("Luis", "fr") == "Bonjour Luis, sens le groove!"
     }
 }

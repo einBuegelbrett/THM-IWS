@@ -48,9 +48,18 @@ class Funktion {
      * greetInLanguage("Anna") -> "Hello Anna, feel the groove!"
      * greetInLanguage("Anna", "de") -> "Hallo Anna, fühl den groove!"
      * greetInLanguage("Luis", "es") -> "Hola Luis, siente el groove!"
-     * greetInLanguage("Luis", "fr") -> "Bonjour Luis, sentir le groove!"
+     * greetInLanguage("Luis", "fr") -> "Bonjour Luis, sens le groove!"
      */
-    static String greetInLanguage() {
-        
+    static String greetInLanguage(String name = "Groover", String language = "en") {
+        switch (language) {
+            case "de":
+                return "Hallo ${name}, fühl den Groove!"
+            case "es":
+                return "Hola ${name}, siente el groove!"
+            case "fr":
+                return "Bonjour ${name}, sens le groove!"
+            default:
+                return "Hello ${name}, feel the groove!"
+        }
     }
 }
