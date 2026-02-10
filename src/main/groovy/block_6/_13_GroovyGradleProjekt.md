@@ -47,6 +47,7 @@ Stelle sicher:
 ## Schritt 3: MarkdownConverter
 Implementiere eine Klasse `MarkdownConverter` mit einer Methode `static String convert(String text)`.  
 Sie soll `#` zu `<h1>`, `##` zu `<h2>` und normalen Text zu `<p>` umwandeln.
+Der erzeugte HTML-Code muss zusätzlich in folgende Grundstruktur eingebettet werden: `<!DOCTYPE html><html><body> … </body></html>`.
 
 ---
 
