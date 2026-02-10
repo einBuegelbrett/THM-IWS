@@ -86,7 +86,7 @@ tasks.register('deleteOutputTask', Delete) {
 // Task 4: introTask
 // ==============================
 //
-// Führe `gradle -q intro` aus.
+// Führe `./gradlew -q intro` aus.
 // Fragen:
 // - Wird die introTask-Task mit ausgeführt?
 // - Warum (nicht)?
