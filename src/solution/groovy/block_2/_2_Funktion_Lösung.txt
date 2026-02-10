@@ -3,7 +3,7 @@ package block_2
 // https://groovy-lang.org/objectorientation.html#_default_arguments
 
 /**
- * Aufgabe 4:
+ * Aufgabe 2:
  * Schreibe Funktionen mit Default-Parametern
  * Thema: Groovy Vibes
  */
