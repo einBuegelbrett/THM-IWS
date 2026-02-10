@@ -1,0 +1,34 @@
+plugins {
+    id 'groovy'
+    id 'application'
+}
+
+group = 'de.thm'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.apache.groovy:groovy:5.0.0'
+}
+
+application {
+    mainClass.set('de.thm.MarkdownConverter')
+}
+
+def outputDir = file("output")
+
+tasks.register(cleanOutput) {
+    // Task erstellen
+}
+
+tasks.register(markdownToHtml(type: JavaExec)) {
+    group = "conversion"
+    description = "Converts Markdown files to HTML by executing MarkdownConverter"
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass.set(application.mainClass)
+
+    dependsOn cleanOutput
+}

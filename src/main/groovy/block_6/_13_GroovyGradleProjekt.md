@@ -12,6 +12,8 @@ Let’s make your build script dance. 🕺
 Dein Projekt soll am Ende folgende Struktur haben (aka: dein persönlicher Dancefloor):
 ```
 markdown-to-html/  
+├── gradlew
+├── gradlew.bat
 ├── build.gradle  
 ├── settings.gradle  
 ├── src/  
@@ -36,11 +38,7 @@ gradle init --type groovy-application --dsl groovy
 ---
 
 ## Schritt 2: build.gradle vorbereiten
-Stelle sicher:
-- Plugin: groovy
-- Repository: mavenCentral()
-- Dependency: Groovy
-- Neuer Task: markdownToHtml
+Die ausgehende build.gradle ist in diesem Verzeichnis zu finden und soll im Projekt verwendet werden.
 
 ---
 
@@ -64,25 +62,22 @@ Ich liebe "Le Freak" von CHIC
 ---
 
 ## Schritt 5: Gradle Task
-Erstelle einen eigenen Gradle-Task mit dem Namen: markdownToHtml
+Erstelle einen eigenen Gradle-Task "cleanOutput":
+- Aufgabe: Säubert den output/-Ordner, indem alle Dateien darin gelöscht werden.
+- Wenn der Ordner noch nicht existiert, wird er automatisch erstellt.
 
-Der Task soll:
-- alle .md Dateien aus dem Ordner input/ einlesen
-- den Inhalt jeder Datei laden
-- den Text mit MarkdownConverter.convert(text) umwandeln
-- für jede Datei eine .html Datei erzeugen
-- den output/ Ordner erstellen, falls er noch nicht existiert
-- die HTML-Dateien im Ordner output/ speichern
+Als Basis gibt es den Task "markdownToHtml”, der nach dem Cleanen des Outputs die Main ausführt. Führe diesen Task immer aus:
 
 ```bash
-gradle markdownToHtml
+./gradlew markdownToHtml
 ```
 
 ## Schritt 6: Projekt ausführen & Ergebnis prüfen
 Task ausführen
-```
+```bash
 ./gradlew markdownToHtml
 ```
+Im Output-Ordner sollte eine generierte HTML-Datei erscheinen.
 
 Viel Erfolg! https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1
 
