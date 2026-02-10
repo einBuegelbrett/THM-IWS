@@ -79,7 +79,7 @@ tasks.register('copyWarTask', Copy) {
 // - Was passiert, wenn die Datei nicht existiert?
 // - Warum ist es sinnvoll, solche Delete-Tasks im Build zu haben?
 tasks.register('deleteOutputTask', Delete) {
-    delete layout.buildDirectory.file("outputs/1.txt")
+    delete file("outputs/1.txt")
 }
 
 // ==============================

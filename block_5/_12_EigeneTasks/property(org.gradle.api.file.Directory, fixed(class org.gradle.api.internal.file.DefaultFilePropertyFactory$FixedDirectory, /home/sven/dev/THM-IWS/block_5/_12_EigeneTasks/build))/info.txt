@@ -1,0 +1,5 @@
+
+            Projekt: _12_EigeneTasks
+            Version: 1.0-SNAPSHOT
+            Datum: Tue Feb 10 19:24:31 CET 2026
+            
