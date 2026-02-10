@@ -91,6 +91,6 @@ class Groover {
      * z.B. "Blue Grooved" als erster Song 
      */
     int countSongs() {
-            ""
+        0
     }
 }
