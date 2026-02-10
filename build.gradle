@@ -17,6 +17,20 @@ dependencies {
     implementation 'de.thm:groovy-wonderland:LOCAL' // <-- Eigene Library
 }
 
+/**
+ * FÜR BLOCK_5 AUFGABE 11
+ * Wird benötigt, um die Klasse „GroovyLibrary“ auszuführen und dabei sicherzustellen,
+ * dass alle eingebundenen Abhängigkeiten (z. B. die lokale Library aus mavenLocal())
+ * im Runtime-Classpath verfügbar sind.
+ *
+ * Ausführung:
+ * ./gradlew runGroovyLibrary
+ */
+tasks.register('runGroovyLibrary', JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'block_5._11_Dependencies_und_Libraries.GroovyLibrary'
+}
+
 test {
     useJUnitPlatform()
 }
